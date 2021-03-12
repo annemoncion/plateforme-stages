@@ -1,28 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header />
+    <nav>
+      <!-- Boucler à traver les routes. (Voir objet "menuItems") -->
+      <!--<router-link v-for="(item, i) in menuItems" :key="i" :to="item.path">{{ item.name }}</router-link>-->
+    </nav>
+    <router-view />
+    <Footer />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 export default {
+  // Comme définit présentement, le filtre de traduction doit être importé dans chaque composant qui l'utilise. Ce serait un comportement à revoir.
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Header,
+    Footer
+  },
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  nav {
+    height: 20px;
+    background-color: blue;
+  }
 }
 </style>
