@@ -25,10 +25,5 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  nav {
-    height: 20px;
-    background-color: blue;
-  }
-}
+@import '@/assets/style/main-style.scss';
 </style>

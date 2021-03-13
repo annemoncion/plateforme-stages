@@ -1,14 +1,1 @@
 @import 'variables', 'fonts', 'mixins', 'base';
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
-
-
-body {
-    background-color: red;
-}
-  
-
-h1, h2, h3, h4, h5, h6, p, ul, a, button, input, label, select, span, div {
-    font-family: 'OpenSans', sans-serif !important;
-}
-  

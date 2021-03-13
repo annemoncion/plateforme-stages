@@ -1,0 +1,33 @@
+@import '../variables', '../mixins';
+
+.a-btn-primary {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.9em;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus {
+        opacity: 0.8;
+        text-decoration: none;
+    }
+
+    &--green {
+        background-color: $green;
+    }
+
+    &--grey {
+        background-color: $grey-dark;
+    }
+
+    &--white {
+        background-color: $white;
+        color: $text-color;
+    }
+
+    &--purple {
+        background-color: $purple;
+    }
+}
