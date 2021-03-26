@@ -2,21 +2,21 @@
   <header class="header">
     <b-navbar toggleable="lg" type="dark" class="header__nav">
       <b-container>
-        <b-navbar-brand href="#"><img class="header__logo" :src="require('@/assets/img/logoipsum.svg')" alt="Logo E-Stage" /></b-navbar-brand>
+        <router-link class="navbar-brand" to="/"><img class="header__logo" :src="require('@/assets/img/logoipsum.svg')" alt="Logo E-Stage" /></router-link>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
 
           <b-navbar-nav class="ml-3 header__nav-block">
-            <a href="/offres-de-stage" class="a-btn-primary a-btn-primary--green">Trouvez votre stage</a>
-            <a href="/demandes-de-stage" class="a-btn-primary a-btn-primary--green">Trouvez votre futur stagiaire</a>
+            <router-link to="/offres-de-stage" class="a-btn-primary a-btn-primary--green a-btn-primary--rounded">Trouvez votre stage</router-link>
+            <router-link to="/demandes-de-stage" class="a-btn-primary a-btn-primary--green a-btn-primary--rounded">Trouvez votre futur stagiaire</router-link>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto header__nav-block">
-            <a href="/offres-de-stage" class="a-btn-primary a-btn-primary--white">Connexion</a>
-            <a href="/demandes-de-stage" class="a-btn-primary a-btn-primary--grey">Inscription</a>
+            <router-link to="/admin" class="a-btn-primary a-btn-primary--white a-btn-primary--rounded">Connexion</router-link>
+            <router-link to="/admin" class="a-btn-primary a-btn-primary--grey a-btn-primary--rounded">Inscription</router-link>
           </b-navbar-nav>
 
         </b-collapse>
@@ -32,7 +32,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/style/components/button.scss';
 .header {
   &__nav {
     background-color: transparent;
