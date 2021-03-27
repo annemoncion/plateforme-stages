@@ -2,16 +2,22 @@
 
 .a-btn-primary {
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: 0;
     color: #fff;
     font-size: 0.9em;
     opacity: 1;
     transition: opacity 0.2s ease;
+    cursor: pointer;
 
     &:hover,
     &:focus {
         opacity: 0.8;
         text-decoration: none;
+        color: $white;
+    }
+
+    &--rounded {
+        border-radius: 4px;
     }
 
     &--green {
@@ -29,5 +35,23 @@
 
     &--purple {
         background-color: $purple;
+    }
+
+    &--red {
+        background-color: $red;
+    }
+
+    &--transparent {
+        padding-left: 0;
+        color: $purple;
+        font-weight: 600;
+    }
+
+    &--white,
+    &--transparent {
+        &:hover,
+        &:focus {
+            color: $purple;
+        }
     }
 }

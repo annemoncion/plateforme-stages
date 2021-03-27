@@ -25,48 +25,103 @@ const routes = [
   {
     path: "/",
     name: "accueil",
-    component: Accueil
+    component: Accueil,
+    meta: {
+      breadcrumb: [
+        { name: 'Accueil' }
+      ]
+    }
   },
   {
     path: "/mon-portail",
     name: "admin",
-    component: Admin
+    component: Admin,
+    meta: {
+      breadcrumb: [
+        { name: 'Accueil', link: '/' },
+        { name: 'Admin' }
+      ]
+    }
   },
   {
     path: "/a-propos",
     name: "aPropos",
-    component: APropos
+    component: APropos,
+    meta: {
+      breadcrumb: [
+        { name: 'Accueil', link: '/' },
+        { name: 'À propos' }
+      ]
+    }
   },
   {
     path: "/demandes-de-stage",
     name: "demandes",
-    component: Demandes
+    component: Demandes,
+    meta: {
+      breadcrumb: [
+        { name: 'Accueil', link: '/' },
+        { name: 'Candidats' }
+      ]
+    }
   },
   {
     path: "/demande",
     name: "detailDemande",
-    component: DetailDemande
+    component: DetailDemande,
+    meta: {
+      breadcrumb: [
+        { name: 'Accueil', link: '/' },
+        { name: 'Candidats', link: '/demandes-de-stage' },
+        { name: 'Nom du candidat' }
+      ]
+    }
   },
   {
     path: "/offre",
     name: "detailOffre",
-    component: DetailOffre
+    component: DetailOffre,
+    meta: {
+      breadcrumb: [
+        { name: 'Accueil', link: '/' },
+        { name: 'Stages', link: '/offres-de-stage' },
+        { name: 'Nom du stage' }
+      ]
+    }
   },
   {
     path: "/nous-joindre",
     name: "nousJoindre",
-    component: NousJoindre
+    component: NousJoindre,
+    meta: {
+      breadcrumb: [
+        { name: 'Accueil', link: '/' },
+        { name: 'Nous joindre' }
+      ]
+    }
   },
   {
     path: "/offres-de-stage",
     name: "offres",
-    component: Offres
+    component: Offres,
+    meta: {
+      breadcrumb: [
+        { name: 'Accueil', link: '/' },
+        { name: 'Offres' }
+      ]
+    }
   },
   {
     path: "/politiques-de-confidentialite",
     name: "politiqueConfidentialite",
-    component: PolitiqueConfidentialite
-  },
+    component: PolitiqueConfidentialite,
+    meta: {
+      breadcrumb: [
+        { name: 'Accueil', link: '/' },
+        { name: 'Confidentialité' }
+      ]
+    }
+  }
 ];
 
 const router = new VueRouter({

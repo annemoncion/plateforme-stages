@@ -7,9 +7,25 @@ h1, h2, h3, h4, h5, h6, p, ul, a, button, input, label, select, span, div {
     color: $text-color;
 }
 
-h1 {
-    font-weight: 600;
-    color: $grey-dark;
+ul {
+    padding-left: 20px;
+    list-style-type: none;
+
+    li {
+        position: relative;
+        margin-bottom: 4px;
+    }
+
+    li:before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: $purple;
+        position: absolute;
+        left: -17px;
+        top: 9px; 
+    }
 }
 
 // Colors
@@ -26,7 +42,7 @@ h1 {
 // Helper classes
 
 .light-text {
-    color: $grey-light;
+    color: $grey-medium;
 }
 
 .text-center {
