@@ -5,10 +5,12 @@
         <Heading>Offres de stage</Heading>
 
         <b-container>
-            <b-row>
+            <b-row class="mt-3">
                 <b-col md="8">
                     <Breadcrumbs />
-                    <Stage />
+                    <div v-for="internship in internships" :key="internship.id" class="mb-3">
+                        <Stage :internship="internship" />
+                    </div>
                 </b-col>
                 <b-col md="4">
                     <FieldFilter />
@@ -79,6 +81,18 @@ export default {
             urlStart: "--bg-ping-pong: url('",
             urlEnd: "')",
         }
+    },
+    computed: {
+        internships () {
+        return this.$store.state.internships
+        }
+    },
+    created () {
+        this.loading = true
+        this.$store.dispatch('fetchInternships')
+        .then(() => {
+            this.loading = false
+        })
     },
 }
 </script>

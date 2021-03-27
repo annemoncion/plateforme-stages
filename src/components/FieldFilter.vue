@@ -7,33 +7,45 @@
 
         <ul class="filter__list">
             <li
-                v-for="filter, k in filters" 
+                v-for="field, k in fields" 
                 :key="k"
                 class="filter__item" 
-                :class="{'is-active' : filter.active}"
+                :class="{'is-active' : field.isActive}"
                 @click="activateFilter(k)">
-                    {{filter.name}}
+                    {{field.title}}
             </li>
         </ul>
+
+
     </div>
 </template>
 
 <script>
-import { FILTERS } from "@/const/filters";
-
 export default {
   name: 'FieldFilter',
   data() {
       return {
-          filters: FILTERS,
+          loading: false
       }
+  },
+  computed: {
+    fields () {
+      return this.$store.state.fields
+    }
+  },
+  created () {
+    this.loading = true
+    this.$store.dispatch('fetchFields')
+      .then(() => {
+        this.loading = false
+      })
   },
   methods: {
       activateFilter(index) {
-          for (let i = 0; i < this.filters.length; i++) {
-              this.filters[i].active = false;
+          for (let i = 0; i < this.fields.length; i++) {
+              this.fields[i].isActive = false;
           }
-          this.filters[index].active = true;
+          this.fields[index].isActive = true;
       }
   }
 }

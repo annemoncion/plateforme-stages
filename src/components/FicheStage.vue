@@ -3,48 +3,48 @@
         <div class="fiche__header">
             <div class="fiche__first-block">
                 <img class="fiche__logo" :src="logoSchool" alt="logo de l'établissement" />
-                <p class="fiche__formation">
+                <p class="fiche__business">
                     Nom de l'entreprise
                 </p>
-                <p class="fiche__adresse">Adresse de l'entreprise<br/>Adresse encore une fois</p>
+                <p class="fiche__address">Adresse de l'entreprise<br/>Adresse encore une fois</p>
             </div>
             <div class="fiche__general-infos">
-                <h2 class="fiche__title">Titre de l'offre de stage</h2>
+                <h2 class="fiche__title">{{ internship.title }}</h2>
                 <div class="fiche__intro">
                     <div class="fiche__intro-col">
                    <p>
-                        <span class="fiche__label">Ville :</span>
-                        Ville
+                        <span class="fiche__label">Ville&nbsp;:</span>
+                        {{ internship.city }}
                     </p>
                     <p>
-                        <span class="fiche__label">Date de début :</span>
-                        Date
+                        <span class="fiche__label">Date de début&nbsp;:</span>
+                        {{ internship.startDate }}
                     </p> 
                     <p>
-                        <span class="fiche__label">Date de fin :</span>
-                        Date
+                        <span class="fiche__label">Date de fin&nbsp;:</span>
+                        {{ internship.endDate }}
                     </p> 
                     <p>
-                        <span class="fiche__label">Nombre d'hrs / sem. :</span>
-                        x
+                        <span class="fiche__label">Nombre d'hrs / sem.&nbsp;:</span>
+                        {{ internship.hoursPerWeek }}
                     </p> 
                 </div>
                 <div class="fiche__intro-col fiche__intro-col--last">
                     <p>
-                        <span class="fiche__label">Secteur d'activité :</span>
-                        Nom du secteur associé aux filtres
+                        <span class="fiche__label">Secteur d'activité&nbsp;:</span>
+                        {{ internship.field }}
                     </p>
                     <p>
-                        <span class="fiche__label">Possibilité d'emploi après le stage :</span>
-                        O/N
+                        <span class="fiche__label">Possibilité d'emploi après le stage&nbsp;:</span>
+                        {{ internship.hiringIsPossible }}
                     </p>
                     <p>
-                        <span class="fiche__label">Rémunération :</span>
-                        O/N
+                        <span class="fiche__label">Rémunération&nbsp;:</span>
+                        {{ internship.isPaid }}
                     </p>
                     <p>
-                        <span class="fiche__label">Date de parution :</span>
-                        0000-00-00
+                        <span class="fiche__label">Date de parution&nbsp;:</span>
+                        {{ internship.parutionDate }}
                     </p> 
                 </div>
                 </div>
@@ -57,23 +57,28 @@
         </div>
 
         <h3 class="fiche__sub-title">Description détaillée</h3>
-        <div class="fiche__description">Description du poste offert</div>
+        <div class="fiche__description">{{ internship.description }}</div>
 
         <h3 class="fiche__sub-title">Compétences recherchées</h3>
         <div class="fiche__description">
-            <ul>
-                <li>Bullet point listant les compétences recherchées</li>
+            <ul v-for="skill, k in internship.desiredSkillset" :key="k">
+                <li>{{ skill }}</li>
             </ul>
         </div>
         
         <h3 class="fiche__sub-title">Informations supplémentaires</h3>
-        <div class="fiche__description">Autres informations</div>
+        <div class="fiche__description">{{ internship.additionalInfos }}</div>
     </div>
 </template>
 
 <script>
 export default {
   name: 'FicheStage',
+  props: {
+        internship: {
+            type: Object,
+        },
+  },
   data() {
     return {
       logoSchool: require('@/assets/img/logoipsum-black.svg'),
@@ -109,24 +114,14 @@ export default {
         margin-bottom: 24px;
     }
 
-    &__formation {
+    &__business {
         text-align: center;
         font-weight: 700;
-        margin-bottom: 30px;
+        margin-bottom: 0;
     }
 
-    &__autres-formations {
-        font-weight: 700;
-        margin-bottom: 4px;
-    }
-
-    &__formation-list {
-        padding-left: 0;
-        list-style-type: none;
-    }
-
-    &__formation-item {
-        font-size: 0.9em;
+    &__address {
+        text-align: center;
     }
 
     &__general-infos {      

@@ -66,9 +66,15 @@ const routes = [
     }
   },
   {
-    path: "/demande",
+    path: "/demande/:id",
     name: "detailDemande",
     component: DetailDemande,
+    props: {
+      default: true,
+      // function mode, more about it below
+      application: route => ({ application: route.params.application }),
+      id: route => ({ id: route.params.id }),
+    },
     meta: {
       breadcrumb: [
         { name: 'Accueil', link: '/' },
@@ -78,9 +84,15 @@ const routes = [
     }
   },
   {
-    path: "/offre",
+    path: "/offre/:id",
     name: "detailOffre",
     component: DetailOffre,
+    props: {
+      default: true,
+      // function mode, more about it below
+      internship: route => ({ internship: route.params.internship }),
+      id: route => ({ id: route.params.id }),
+    },
     meta: {
       breadcrumb: [
         { name: 'Accueil', link: '/' },

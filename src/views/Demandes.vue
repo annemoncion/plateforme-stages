@@ -5,10 +5,12 @@
         <Heading>Candidats</Heading>
 
         <b-container>
-            <b-row>
+            <b-row class="mt-3">
                 <b-col md="8">
                     <Breadcrumbs />
-                    <Candidat />
+                    <div v-for="application in applications" :key="application.id" class="mb-3">
+                        <Candidat :application="application" />
+                    </div>
                 </b-col>
                 <b-col md="4">
                     <FieldFilter />
@@ -79,6 +81,18 @@ export default {
             urlStart: "--bg-ping-pong: url('",
             urlEnd: "')",
         }
+    },
+    computed: {
+        applications () {
+        return this.$store.state.applications
+        }
+    },
+    created () {
+        this.loading = true
+        this.$store.dispatch('fetchApplications')
+        .then(() => {
+            this.loading = false
+        })
     },
 }
 </script>

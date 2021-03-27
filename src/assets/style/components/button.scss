@@ -6,6 +6,9 @@
     color: #fff;
     font-size: 0.9em;
     opacity: 1;
+    -webkit-transition: opacity 0.2s ease;
+    -moz-transition: opacity 0.2s ease;
+    -o-transition: opacity 0.2s ease;
     transition: opacity 0.2s ease;
     cursor: pointer;
 

@@ -1,14 +1,14 @@
 <template>
   <div class="card">
     <div class="card-body">
-        <h5 class="card-title">Nom du candidat</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Lieu</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Secteur</h6>
+        <h5 class="card-title">{{ application.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ application.city }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{ application.field }}</h6>
         <div class="description">
-          <p class="card-text description__text">Courte description. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce ut ligula iaculis felis commodo cursus.</p>
+          <p class="card-text description__text">{{ application.description }}</p>
           <img v-if="!enVedette" class="description__logo" :src="logoSchool" alt="Alt du logo" />
         </div>
-        <router-link to="/demande" class="a-btn-primary a-btn-primary--transparent mr-2">Détails</router-link>
+        <router-link :to="{ name: 'detailDemande', params: {application: application, id:application.id} }" class="a-btn-primary a-btn-primary--transparent mr-2">Détails</router-link>
         <a href="#" class="a-btn-primary a-btn-primary--purple">Contacter</a>
     </div>
   </div>
@@ -22,6 +22,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    application: {
+      type: Object,
+    },
   },
   data() {
     return {
@@ -32,6 +35,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.card {
+  width: 100%
+}
+
 .description {
   display: flex;
   margin-bottom: 24px;
