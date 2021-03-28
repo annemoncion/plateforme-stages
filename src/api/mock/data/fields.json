@@ -1,0 +1,92 @@
+[
+    {
+        "id": "68277f48-38b5-4d87-ae6f-1651e0624fe3",
+        "title": "Administrations publiques",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "7f415844-0266-4af0-be40-eb26b0ab3082",
+        "title": "Agriculture, foresterie, pêche et chasse",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "aec60515-1bbf-4c72-91c9-ad084b964043",
+        "title": "Arts, spectcles et loisirs",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "a6ed6f75-75b7-4114-bba0-77e3aeaeea85",
+        "title": "Autres services (sauf les administrations publiques)",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "20724935-051b-4495-a877-85f0b9a1c900",
+        "title": "Commerce de détail",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "0a9c75d4-aede-43cb-8a86-bc5b0326c4c2",
+        "title": "Commerce de gros",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "e7b50396-8fc3-4f65-ba10-9de9ae44f818",
+        "title": "Construction",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "680972b1-3a9b-4620-958b-d2ab5beae20e",
+        "title": "Extraction minière, et extraction de pétrole et de gaz",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "4ca1dd73-e0e2-47cc-81f2-27d111dc8b23",
+        "title": "Fabrication",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "47bed087-a9b8-421b-9a49-42730c37683a",
+        "title": "Finance et assurances",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "5308b28b-bb99-4000-8471-acb4d0770f73",
+        "title": "Gestion de sociétés et d'entreprises",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "0e30f8f4-43dd-4a71-9d5d-a34465cd06bb",
+        "title": "Hébergement et services de restauration",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "7de8b4eb-191c-4e20-bc7f-14093dadd89e",
+        "title": "Industrie de l'information et industrie culturelle",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "d310c6ac-4cf5-41cf-bb33-7f1356890a8f",
+        "title": "Services publics",
+        "isActive": false,
+        "isDeleted": false
+    },
+    {
+        "id": "fd1c4002-3695-43eb-a8e4-5b6b1350f2de",
+        "title": "Transport et entreposage",
+        "isActive": false,
+        "isDeleted": false
+    }
+]

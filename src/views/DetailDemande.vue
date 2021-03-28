@@ -8,7 +8,7 @@
             <b-row>
                 <b-col md="8">
                     <Breadcrumbs />
-                    <FicheCandidat />
+                    <FicheCandidat :application="application" />
                 </b-col>
                 <b-col md="4">
                     <FieldFilter />
@@ -80,6 +80,11 @@ export default {
             urlEnd: "')",
         }
     },
+    computed: {
+        application() {
+            return this.$route.params.application;
+        }
+    }
 }
 </script>
 

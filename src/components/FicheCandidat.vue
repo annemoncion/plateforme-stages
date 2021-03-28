@@ -4,50 +4,52 @@
             <div class="fiche__first-block">
                 <img class="fiche__logo" :src="logoSchool" alt="logo de l'établissement" />
                 <p class="fiche__formation">
-                    Formation:<br/>Programme suivi (formation)
+                    Formation:<br/>{{ application.mainTraining }}
                 </p>
-                <p class="fiche__autres-formations">Autres formations :</p>
-                <ul class="fiche__formation-list">
-                    <li class="fiche__formation-item">Autres formations listées</li>
-                </ul>
+                <div v-if="application.otherTrainings.length > 0">
+                    <p class="fiche__autres-formations">Autres formations&nbsp;:</p>
+                    <ul v-for="training, k in application.otherTrainings" :key="k" class="fiche__formation-list">
+                        <li class="fiche__formation-item">{{ training }}</li>
+                    </ul>
+                </div>
             </div>
             <div class="fiche__general-infos">
-                <h2 class="fiche__title">Titre de la demande de stage</h2>
+                <h2 class="fiche__title">{{ application.title }}</h2>
                 <div class="fiche__intro">
                     <div class="fiche__intro-col">
                    <p>
-                        <span class="fiche__label">Ville :</span>
-                        Ville
+                        <span class="fiche__label">Ville&nbsp;:</span>
+                        {{ application.city }}
                     </p>
                     <p>
-                        <span class="fiche__label">Date de début :</span>
-                        Date
+                        <span class="fiche__label">Date de début&nbsp;:</span>
+                        {{ application.startDate }}
                     </p> 
                     <p>
-                        <span class="fiche__label">Date de fin :</span>
-                        Date
+                        <span class="fiche__label">Date de fin&nbsp;:</span>
+                        {{ application.endDate }}
                     </p> 
                     <p>
-                        <span class="fiche__label">Nombre d'hrs / sem. :</span>
-                        x
+                        <span class="fiche__label">Nombre d'hrs / sem.&nbsp;:</span>
+                        {{ application.hoursPerWeek }}
                     </p> 
                 </div>
                 <div class="fiche__intro-col fiche__intro-col--last">
                     <p>
-                        <span class="fiche__label">Type de stage :</span>
-                        TPL/TPA/ATE
+                        <span class="fiche__label">Type de stage&nbsp;:</span>
+                        {{ application.internshipType }}
                     </p>
                     <p>
-                        <span class="fiche__label">Duré du stage :</span>
-                        x semaines
+                        <span class="fiche__label">Duré du stage&nbsp;:</span>
+                        {{ application.internshipWeeksLength }}
                     </p>
                     <p>
-                        <span class="fiche__label">Rémunération :</span>
-                        O/N/D
+                        <span class="fiche__label">Rémunération&nbsp;:</span>
+                        {{ application.wantsPay }}
                     </p>
                     <p>
-                        <span class="fiche__label">Date de parution :</span>
-                        0000-00-00
+                        <span class="fiche__label">Date de parution&nbsp;:</span>
+                        {{ application.parutionDate }}
                     </p> 
                 </div>
                 </div>
@@ -60,28 +62,33 @@
         </div>
 
         <h3 class="fiche__sub-title">Type de stage recherché</h3>
-        <div class="fiche__description">Description du poste recherché</div>
+        <div class="fiche__description">{{ application.description }}</div>
 
         <h3 class="fiche__sub-title">Compétences acquises</h3>
         <div class="fiche__description">
-            <ul>
-                <li>Bullet point listant les compétences acquises</li>
+            <ul v-for="skill, h in application.acquiredSkillset" :key="h">
+                <li>{{ skill }}</li>
             </ul>
         </div>
         
         <h3 class="fiche__sub-title">À propos du candidat</h3>
-        <div class="fiche__description">Autres informations</div>
+        <div class="fiche__description">{{ application.additionalInfos }}</div>
     </div>
 </template>
 
 <script>
 export default {
   name: 'FicheCandidat',
-  data() {
-    return {
-      logoSchool: require('@/assets/img/logoipsum-black.svg'),
-    }
-  }
+  props: {
+        application: {
+            type: Object,
+        },
+  },
+    data() {
+        return {
+            logoSchool: require('@/assets/img/logoipsum-black.svg'),
+        }
+    },
 }
 </script>
 

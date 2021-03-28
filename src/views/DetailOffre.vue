@@ -8,7 +8,7 @@
             <b-row>
                 <b-col md="8">
                     <Breadcrumbs />
-                    <FicheStage />
+                    <FicheStage :internship="internship" />
                 </b-col>
                 <b-col md="4">
                     <FieldFilter />
@@ -80,6 +80,11 @@ export default {
             urlEnd: "')",
         }
     },
+    computed: {
+        internship() {
+            return this.$route.params.internship;
+        }
+    }
 }
 </script>
 

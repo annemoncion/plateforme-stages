@@ -21,6 +21,7 @@ export default {
 .heading {
     position: relative;
     top: -48px;
+    margin-bottom: -48px;
     &__title {
        color: #fff; 
     }
