@@ -61,8 +61,8 @@
 
         <h3 class="fiche__sub-title">Compétences recherchées</h3>
         <div class="fiche__description">
-            <ul v-for="skill, k in internship.desiredSkillset" :key="k">
-                <li>{{ skill }}</li>
+            <ul>
+                <li v-for="skill, k in internship.desiredSkillset" :key="k">{{ skill }}</li>
             </ul>
         </div>
         

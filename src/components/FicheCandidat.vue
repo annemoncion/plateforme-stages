@@ -8,8 +8,13 @@
                 </p>
                 <div v-if="application.otherTrainings.length > 0">
                     <p class="fiche__autres-formations">Autres formations&nbsp;:</p>
-                    <ul v-for="training, k in application.otherTrainings" :key="k" class="fiche__formation-list">
-                        <li class="fiche__formation-item">{{ training }}</li>
+                    <ul class="fiche__formation-list">
+                        <li 
+                            v-for="training, k in application.otherTrainings" 
+                            :key="k"
+                            class="fiche__formation-item">
+                            {{ training }}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -66,8 +71,8 @@
 
         <h3 class="fiche__sub-title">Compétences acquises</h3>
         <div class="fiche__description">
-            <ul v-for="skill, h in application.acquiredSkillset" :key="h">
-                <li>{{ skill }}</li>
+            <ul>
+                <li v-for="skill, h in application.acquiredSkillset" :key="h">{{ skill }}</li>
             </ul>
         </div>
         

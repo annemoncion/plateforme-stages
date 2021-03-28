@@ -14,7 +14,7 @@
         "internshipWeeksLength": 9,
         "isPaid": "Oui",
         "parutionDate": "2021-04-30",
-        "authorID": "",
+        "authorID": "af9a1d21-d7a0-4d41-896b-814caa0103b6",
         "isActive": true,
         "isDeleted": false,
         "isValidated": true
@@ -34,7 +34,7 @@
         "internshipWeeksLength": 9,
         "isPaid": "Non",
         "parutionDate": "2021-04-30",
-        "authorID": "",
+        "authorID": "af9a1d21-d7a0-4d41-896b-814caa0103b6",
         "isActive": true,
         "isDeleted": false,
         "isValidated": true
@@ -54,7 +54,7 @@
         "internshipWeeksLength": 9,
         "isPaid": "Oui",
         "parutionDate": "2021-04-30",
-        "authorID": "",
+        "authorID": "af9a1d21-d7a0-4d41-896b-814caa0103b6",
         "isActive": true,
         "isDeleted": false,
         "isValidated": true
@@ -74,10 +74,10 @@
         "internshipWeeksLength": 9,
         "isPaid": "Non",
         "parutionDate": "2021-04-30",
-        "authorID": "",
+        "authorID": "af9a1d21-d7a0-4d41-896b-814caa0103b6",
         "isActive": true,
         "isDeleted": false,
-        "isValidated": true
+        "isValidated": false
     },
     {
         "id": "8956d3ee-280b-485d-9072-ff4396213fd3",
@@ -94,7 +94,7 @@
         "internshipWeeksLength": 4,
         "isPaid": "",
         "parutionDate": "",
-        "authorID": "",
+        "authorID": "af9a1d21-d7a0-4d41-896b-814caa0103b6",
         "isActive": false,
         "isDeleted": false,
         "isValidated": false

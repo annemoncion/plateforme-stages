@@ -1,0 +1,73 @@
+@import '@/assets/style/_variables.scss';
+
+.card {
+  width: 100%;
+  height: 300px;
+}
+
+.is-admin {
+  background-color: $grey-light;
+  border: 0;
+  border-radius: 0;
+  -webkit-box-shadow: 0px 3px 5px 2px rgba(0,0,0,0.2); 
+  box-shadow: 0px 3px 5px 2px rgba(0,0,0,0.2);
+
+  &__title {
+      border-bottom: 2px solid #000;
+      font-weight: bold;
+      font-size: 1.5em;
+      padding-bottom: 4px;
+      display: flex;
+      align-items: flex-end;
+      svg {
+          position: relative;
+          top: 10px;
+      }
+  }
+
+  &__parution {
+      font-size: 0.9rem;
+      margin-left: auto;
+      font-weight: normal;
+  }
+
+  &__cols {
+      display: flex;
+  }
+
+  &__col {
+    
+      &--last {
+          text-align: right;
+          flex-basis: 50%;
+      }
+  }
+
+  &__footer {
+      display: flex;
+      justify-content: flex-end;
+      
+      &-left {
+          margin-right: auto;
+          margin-left: 0;
+      }
+  }
+}
+
+.description {
+  display: flex;
+  margin-bottom: 0;
+  height: 48px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+
+  &__logo {
+    flex-shrink: 0;
+  }
+}
+
+.card-footer {
+    background-color: transparent;
+    border: 0;
+}

@@ -84,7 +84,7 @@ export default {
     },
     computed: {
         applications () {
-        return this.$store.state.applications
+            return this.$store.state.applications
         }
     },
     created () {

@@ -1,12 +1,8 @@
 <template>
   <div id="app">
-    <Header />
-    <nav>
-      <!-- Boucler à traver les routes. (Voir objet "menuItems") -->
-      <!--<router-link v-for="(item, i) in menuItems" :key="i" :to="item.path">{{ item.name }}</router-link>-->
-    </nav>
+    <Header v-if="publicWebsite" />
     <router-view />
-    <Footer />
+    <Footer v-if="publicWebsite" />
   </div>
 </template>
 
@@ -21,6 +17,11 @@ export default {
     Header,
     Footer
   },
+  computed: {
+    publicWebsite() {
+      return this.$route.path !== "/mon-portail";
+    }
+  }
 }
 </script>
 

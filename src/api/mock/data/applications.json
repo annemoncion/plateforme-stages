@@ -17,10 +17,10 @@
         "otherTrainings": ["BAC en Arts contemporains"],
         "internshipType": "Alternance travail/études",
         "parutionDate": "2021-03-15",
-        "authorID": "",
+        "authorID": "87b6983b-6942-43bb-9142-c8c96fed30f5",
         "isActive": true,
         "isDeleted": false,
-        "isValidated": true
+        "isValidated": false
     },
     {
         "id": "6f8645e4-fa7d-4751-b3cf-1039937cd235",
@@ -40,7 +40,7 @@
         "otherTrainings": [],
         "internshipType": "Temps plein",
         "parutionDate": "2021-03-20",
-        "authorID": "",
+        "authorID": "87b6983b-6942-43bb-9142-c8c96fed30f5",
         "isActive": true,
         "isDeleted": false,
         "isValidated": true
@@ -63,7 +63,7 @@
         "otherTrainings": [],
         "internshipType": "Temps partiel",
         "parutionDate": "2021-03-12",
-        "authorID": "",
+        "authorID": "87b6983b-6942-43bb-9142-c8c96fed30f5",
         "isActive": true,
         "isDeleted": false,
         "isValidated": true
@@ -86,7 +86,7 @@
         "otherTrainings": ["Bac Design, Université Concordia"],
         "internshipType": "Temps partiel",
         "parutionDate": "2021-03-20",
-        "authorID": "",
+        "authorID": "87b6983b-6942-43bb-9142-c8c96fed30f5",
         "isActive": true,
         "isDeleted": false,
         "isValidated": true
@@ -109,7 +109,7 @@
         "otherTrainings": [""],
         "internshipType": "",
         "parutionDate": "",
-        "authorID": "",
+        "authorID": "87b6983b-6942-43bb-9142-c8c96fed30f5",
         "isActive": false,
         "isDeleted": false,
         "isValidated": false
