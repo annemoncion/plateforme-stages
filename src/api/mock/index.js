@@ -23,5 +23,9 @@ export default {
   },
   fetchUsers () {
     return fetch(users, 100) // wait 0.1s before returning users
+  },
+  addApplication (application) {
+    console.log(application);
+    applications.push(application);
   }
 }

@@ -60,11 +60,7 @@
         <div class="fiche__description">{{ internship.description }}</div>
 
         <h3 class="fiche__sub-title">Compétences recherchées</h3>
-        <div class="fiche__description">
-            <ul>
-                <li v-for="skill, k in internship.desiredSkillset" :key="k">{{ skill }}</li>
-            </ul>
-        </div>
+        <p class="fiche__description">{{ internship.desiredSkillset }}</p>
         
         <h3 class="fiche__sub-title">Informations supplémentaires</h3>
         <div class="fiche__description">{{ internship.additionalInfos }}</div>

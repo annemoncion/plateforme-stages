@@ -1,18 +1,4 @@
 <template>
-<!-- 
-    "acquiredSkillset": ["Rédaction", "Recherche"],
-    "wantsPay": "À la discrétion de l'employeur",
-    "additionalInfos": "Proin est felis, venenatis ut lorem vel, gravida scelerisque elit. Proin bibendum sem mi, nec pharetra mi rutrum in. Fusce consectetur a eros in luctus. Cras non nisi vitae nisi efficitur accumsan mollis eu est. Nullam molestie, ipsum bibendum imperdiet suscipit, nisi libero efficitur est, nec venenatis est lorem mollis justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi fringilla sed massa quis sollicitudin. Quisque sagittis maximus ultricies. Ut purus risus, blandit aliquam nulla vel, efficitur interdum turpis. Mauris pulvinar vulputate porta. Donec sed dolor at elit lobortis porttitor eu sed turpis. Sed tincidunt porttitor velit, sed porta est lacinia vitae. Nam cursus mauris a maximus ultricies. Phasellus blandit metus sit amet rutrum dignissim.",
-    "internshipWeeksLength": 8,
-    "mainTraining": "BAC en Journalisme, Université Concordia",
-    "logoURL": "",
-    "otherTrainings": ["BAC en Arts contemporains"],
-    "internshipType": "Alternance travail/études",
-    "authorID": "87b6983b-6942-43bb-9142-c8c96fed30f5",
-    "isActive": true,
-    "isDeleted": false,
-    "isValidated": false
--->
   <div>
         <h2 class="font-bold mt-2">
             Demande de stage
@@ -33,7 +19,7 @@
 
                 <b-form-invalid-feedback
                     id="title-live-feedback"
-                    >Ce champ est obligatoire et recquiert entre 5 et 60 caractères.</b-form-invalid-feedback>
+                    >Ce champ est obligatoire et requiert entre 5 et 60 caractères.</b-form-invalid-feedback>
             </b-form-group>
 
             <!-- Secteur d'activité -->
@@ -62,7 +48,7 @@
 
                 <b-form-invalid-feedback
                     id="city-live-feedback"
-                >Ce champ est obligatoire et recquiert entre 3 et 100 caractères.</b-form-invalid-feedback>
+                >Ce champ est obligatoire et requiert entre 3 et 100 caractères.</b-form-invalid-feedback>
             </b-form-group>
 
             <!-- Date de début de stage -->
@@ -101,6 +87,23 @@
                 >Vous devez sélectionnez une date.</b-form-invalid-feedback>
             </b-form-group>
 
+            <!-- Nombre de semaines de stage -->
+            <b-form-group v-if="$v.form.endDate.$model" id="weeks-number-input-group" label="Nombre de semaines de stage" label-for="weeks-number-input-group">
+                <b-form-input
+                    id="weeksNumber"
+                    name="weeksNumber"
+                    v-model="form.weeksNumber"
+                    :value="form.weeksNumber"
+                    type="number"
+                    aria-describedby="weeks-number-live-feedback"
+                    disabled
+                ></b-form-input>
+
+                <b-form-invalid-feedback
+                    id="weeks-number-live-feedback"
+                >Le nombre d'heures de travail par semaine est obligatoire et doit se situer entre 5 h et 40 h.</b-form-invalid-feedback>
+            </b-form-group>
+
             <!-- Description -->
             <b-form-group id="desc-input-group" label="Description de la demande" label-for="desc-input-group">
                 <b-form-textarea
@@ -113,7 +116,7 @@
 
                 <b-form-invalid-feedback
                     id="description-live-feedback"
-                >La description est obligatoire et recquiert entre 10 et 500 caractères.</b-form-invalid-feedback>
+                >La description est obligatoire et requiert entre 10 et 500 caractères.</b-form-invalid-feedback>
             </b-form-group>
 
             <!-- Nombre d'heures par semaine -->
@@ -134,15 +137,92 @@
                 >Le nombre d'heures de travail par semaine est obligatoire et doit se situer entre 5 h et 40 h.</b-form-invalid-feedback>
             </b-form-group>
 
-            <b-form-group id="input-group-4" v-slot="{ ariaDescribedby }">
-                <b-form-checkbox-group
-                    v-model="form.checked"
-                    id="checkboxes-4"
-                    :aria-describedby="ariaDescribedby"
-                >
-                    <b-form-checkbox value="me">Check me out</b-form-checkbox>
-                    <b-form-checkbox value="that">Check that out</b-form-checkbox>
-                </b-form-checkbox-group>
+            <!-- Rémunération -->
+            <b-form-group id="wants-pay-input-group" label="Le stage doit-il être rémunéré?" label-for="wants-pay-input-group">
+                <b-form-select
+                    id="wantsPay"
+                    name="wantsPay"
+                    v-model="$v.form.wantsPay.$model"
+                    :options="salaries"
+                    :state="validateState('wantsPay')"
+                    aria-describedby="wants-pay-live-feedback"
+                ></b-form-select>
+
+                <b-form-invalid-feedback id="wants-pay-live-feedback">Vous devez sélectionner une option.</b-form-invalid-feedback>
+            </b-form-group>
+
+            <!-- Type de stage -->
+            <b-form-group id="internship-type-input-group" label="Type de stage" label-for="internship-type-input-group">
+                <b-form-select
+                    id="internshipType"
+                    name="internshipType"
+                    v-model="$v.form.internshipType.$model"
+                    :options="internshipTypes"
+                    :state="validateState('internshipType')"
+                    aria-describedby="internship-type-live-feedback"
+                ></b-form-select>
+
+                <b-form-invalid-feedback id="internship-type-live-feedback">Vous devez sélectionner une option.</b-form-invalid-feedback>
+            </b-form-group>
+
+            <!-- Formation principale -->
+            <b-form-group id="main-training-input-group" label="Nom de mon programme d'études" label-for="main-training-input-group">
+                <b-form-input
+                    id="mainTraining"
+                    name="mainTraining"
+                    v-model="$v.form.mainTraining.$model"
+                    :state="validateState('mainTraining')"
+                    aria-describedby="main-training-live-feedback"
+                    ></b-form-input>
+
+                <b-form-invalid-feedback
+                    id="main-training-live-feedback"
+                    >Ce champ est obligatoire et requiert un maximum de 120 caractères.</b-form-invalid-feedback>
+            </b-form-group>
+
+            <!-- Autres formations -->
+            <b-form-group id="other-trainings-input-group" label="Autres formations" label-for="other-trainings-input-group">
+                <b-form-input
+                    id="otherTrainings"
+                    name="otherTrainings"
+                    v-model="$v.form.otherTrainings.$model"
+                    :state="validateState('otherTrainings')"
+                    aria-describedby="other-trainings-live-feedback"
+                    ></b-form-input>
+
+                <b-form-invalid-feedback
+                    id="other-trainings-live-feedback"
+                    >Ce champ est obligatoire et requiert un maximun de 250 caractères.</b-form-invalid-feedback>
+            </b-form-group>
+
+            <!-- Compétences acquises -->
+            <b-form-group id="acquired-skillset-input-group" label="Compétences acquises" label-for="acquired-skillset-input-group">
+                <b-form-textarea
+                    id="acquiredSkillset"
+                    name="acquiredSkillset"
+                    v-model="$v.form.acquiredSkillset.$model"
+                    :state="validateState('acquiredSkillset')"
+                    aria-describedby="acquired-skillset-live-feedback"
+                    ></b-form-textarea>
+
+                <b-form-invalid-feedback
+                    id="acquired-skillset-live-feedback"
+                    >Ce champ est obligatoire et requiert un maximum de 250 caractères.</b-form-invalid-feedback>
+            </b-form-group>
+
+            <!-- Infos additionnelles -->
+            <b-form-group id="additional-infos-input-group" label="Informations additionnelles" label-for="additional-infos-input-group">
+                <b-form-textarea
+                    id="additionalInfos"
+                    name="additionalInfos"
+                    v-model="$v.form.additionalInfos.$model"
+                    :state="validateState('additionalInfos')"
+                    aria-describedby="additional-infos-live-feedback"
+                ></b-form-textarea>
+
+                <b-form-invalid-feedback
+                    id="additional-infos-live-feedback"
+                >Le maximum de 500 caractères a été dépassé.</b-form-invalid-feedback>
             </b-form-group>
 
             <b-button type="submit" variant="primary" class="mr-1">Soumettre</b-button>
@@ -183,6 +263,7 @@ export default {
 
         return {
             form: {
+                id: '',
                 title: '',
                 field: null,
                 city: '',
@@ -190,14 +271,36 @@ export default {
                 endDate: null,
                 description: '',
                 hoursPerWeek: null,
-                checked: [],
+                acquiredSkillset: '',
+                wantsPay: null,           
+                additionalInfos: '',
+                weeksNumber: 0,
+                mainTraining: '',
+                otherTrainings: '', 
+                internshipType: null,     
                 parutionDate: parutionDate,
+                authorID: '87b6983b-6942-43bb-9142-c8c96fed30f5',
+                isActive: true,
+                isDeleted: false,
+                isValidated: false
             },
             show: true,
             loading: false,
             min: minDate,
             max: maxDate,
             today: today,
+            salaries: [
+                {text: "Sélectionnez", value: null},
+                {text: "Oui", value: "Oui"},
+                {text: "Non", value: "Non"},
+                {text: "À la discrétion de l'employeur", value: "À la discrétion de l'employeur"},
+            ],
+            internshipTypes: [
+                {text: "Sélectionnez", value: null},
+                {text: "Temps plein", value: "Temps plein"},
+                {text: "Temps partiel", value: "Temps partiel"},
+                {text: "Alternance travail/études", value: "Alternance travail/études"},
+            ]
         }
     },
     computed: {
@@ -213,6 +316,22 @@ export default {
 
           return activeFields;
         },
+        endDate() {
+            return this.form.endDate
+        },
+        
+    },
+    watch: {
+        endDate(value){
+            // binding this to the data value in the codePostal input
+            this.form.endDate = value
+
+            if (value) {
+                this.updateWeeksNumber()
+            }
+            
+        },
+
     },
     created () {
         this.loading = true
@@ -251,11 +370,46 @@ export default {
                 required,
                 minValue: minValue(5),
                 maxValue: maxValue(40)
-
+            },
+            wantsPay: {
+                required,
+            },
+            internshipType: {
+                required,
+            },
+            mainTraining: {
+                required,
+                maxLength: maxLength(120),
+            },
+            otherTrainings: {
+                required,
+                maxLength: maxLength(250),
+            },
+            acquiredSkillset: {
+                required,
+                maxLength: maxLength(250),
+            },
+            additionalInfos: {
+                maxLength: maxLength(500),
             },
         }
     },
     methods: {
+        updateWeeksNumber() {
+            if (this.form.startDate.length > 0 &&  this.form.endDate.length > 0) {
+                this.form.weeksNumber = Math.round(((new Date(this.form.endDate)) - (new Date(this.form.startDate))) / (7 * 24 * 60 * 60 * 1000))
+            }
+            else {
+                this.form.weeksNumber = 0;
+            }  
+        },
+        // Fonction pour générer un identifiant unique pour le mock API. Ne pas utiliser en production.
+        generateID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        },
         validateState(name) {
             const { $dirty, $error } = this.$v.form[name];
             return $dirty ? !$error : null;
@@ -268,6 +422,14 @@ export default {
                 startDate: null,
                 endDate: null,
                 description: '',
+                hoursPerWeek: null,
+                acquiredSkillset: '',
+                wantsPay: null,           
+                additionalInfos: '',
+                weeksNumber: 0,
+                mainTraining: '',
+                otherTrainings: '', 
+                internshipType: null
             };
 
             this.$nextTick(() => {
@@ -277,9 +439,12 @@ export default {
         onSubmit() {
             this.$v.form.$touch();
             if (this.$v.form.$anyError) {
+
                 return;
             }
-
+            // Append ID + send form to mock api application.json
+            this.form.id = this.generateID();
+            this.$store.dispatch('addApplication', this.form);
             alert("Le formulaire a bel et bien été envoyé.");
         }
     }

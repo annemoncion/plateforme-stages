@@ -8,14 +8,7 @@
                 </p>
                 <div v-if="application.otherTrainings.length > 0">
                     <p class="fiche__autres-formations">Autres formations&nbsp;:</p>
-                    <ul class="fiche__formation-list">
-                        <li 
-                            v-for="training, k in application.otherTrainings" 
-                            :key="k"
-                            class="fiche__formation-item">
-                            {{ training }}
-                        </li>
-                    </ul>
+                    <p class="fiche__formation-list">{{ application.otherTrainings }}</p>
                 </div>
             </div>
             <div class="fiche__general-infos">
@@ -46,7 +39,7 @@
                     </p>
                     <p>
                         <span class="fiche__label">Duré du stage&nbsp;:</span>
-                        {{ application.internshipWeeksLength }}
+                        {{ application.weeksNumber }}
                     </p>
                     <p>
                         <span class="fiche__label">Rémunération&nbsp;:</span>
@@ -70,11 +63,7 @@
         <div class="fiche__description">{{ application.description }}</div>
 
         <h3 class="fiche__sub-title">Compétences acquises</h3>
-        <div class="fiche__description">
-            <ul>
-                <li v-for="skill, h in application.acquiredSkillset" :key="h">{{ skill }}</li>
-            </ul>
-        </div>
+        <p class="fiche__description">{{ application.acquiredSkillset }}</p>
         
         <h3 class="fiche__sub-title">À propos du candidat</h3>
         <div class="fiche__description">{{ application.additionalInfos }}</div>
