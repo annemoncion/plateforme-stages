@@ -25,29 +25,24 @@ export default new Vuex.Store({
     setUsers (state, users) {
       state.users = users
     },
-    newApplication (state, application) {
-      Vue.set(state.application, 'id', application.id);
-      Vue.set(state.application, 'title', application.title);
-      Vue.set(state.application, 'field', application.field);
-      Vue.set(state.application, 'city', application.city);
-      Vue.set(state.application, 'startDate', application.startDate);
-      Vue.set(state.application, 'endDate', application.endDate);
-      Vue.set(state.application, 'description', application.description);
-      Vue.set(state.application, 'hoursPerWeek', application.hoursPerWeek);
-      Vue.set(state.application, 'acquiredSkillset', application.acquiredSkillset);
-      Vue.set(state.application, 'wantsPay', application.wantsPay);
-      Vue.set(state.application, 'additionalInfos', application.additionalInfos);
-      Vue.set(state.application, 'weeksNumber', application.weeksNumber);
-      Vue.set(state.application, 'mainTraining', application.mainTraining);
-      Vue.set(state.application, 'otherTrainings', application.otherTrainings);
-      Vue.set(state.application, 'internshipType', application.internshipType);
-      Vue.set(state.application, 'parutionDate', application.parutionDate);
-      Vue.set(state.application, 'authorID', application.authorID);
-      Vue.set(state.application, 'isActive', application.isActive);
-      Vue.set(state.application, 'isDeleted', application.isDeleted);
-      Vue.set(state.application, 'isValidated', application.isValidated);
-      state.applications.push(state.application);
+    addApplication (state, application) {
+      state.applications.push(application)
     },
+    modifyApplication (state, application) {
+      // get index of object with param id
+      //const dataIndex = state.applications.map(function(application) { return application.id; }).indexOf(id);
+      const dataIndex = state.applications.findIndex(x => x.id == application.id);
+
+      // replace object with new data
+      state.applications.splice(dataIndex,1,application);
+    },
+    deleteApplication (state, id) {
+      // get index of object with id property
+      const removeIndex = state.applications.map(function(application) { return application.id; }).indexOf(id);
+
+      // remove object
+      state.applications.splice(removeIndex, 1);
+    }
   },
 
   actions: {
@@ -71,10 +66,14 @@ export default new Vuex.Store({
         .fetchUsers()
         .then(users => commit('setUsers', users))
     },
-    addApplication ({ commit }, newData) {
-      return client      
-        .addApplication(newData)
-        .then(newData => commit('newApplication', newData))
+    addApplication (context, newData) {
+      context.commit('addApplication', newData)
     },
+    modifyApplication (context, newData) {
+      context.commit('modifyApplication', newData)
+    },
+    deleteApplication (context, id) {
+      context.commit('deleteApplication', id)
+    }
   }
 })
