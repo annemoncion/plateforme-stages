@@ -30,17 +30,17 @@
         <a href="#" class="a-btn-primary a-btn-primary--purple d-inline-block">Postuler</a>
     </div>
     <div v-else class="card-footer is-admin__footer">
-      <button class="a-btn-primary a-btn-primary--blue is-admin__footer-left">Détails</button>
+      <router-link :to="{ name: 'detailOffre', params: {internship: internship, id:internship.id} }" target="_blank" class="a-btn-primary a-btn-primary--blue is-admin__footer-left">Détails</router-link>
       <div v-if="isWaitingForValidation">
         <button class="a-btn-primary a-btn-primary--red mx-1">Refuser</button>
         <button class="a-btn-primary a-btn-primary--green">Accepter</button>
       </div>
       <div v-else>
-        <button class="a-btn-primary a-btn-primary--green">
+        <button class="a-btn-primary a-btn-primary--green" @click="showModalModify(internship.id)">
           <b-icon icon="pencil-square" class="mr-1" />
           Modifier
         </button>
-        <button class="a-btn-primary a-btn-primary--red mx-1">
+        <button class="a-btn-primary a-btn-primary--red mx-1" @click="showModalDelete(internship.id)">
           <b-icon icon="x-square-fill" class="mr-1" />
           Supprimer
         </button>
@@ -95,6 +95,14 @@ export default {
           this.loading = false
       })
   },
+  methods: {
+      showModalModify(id) {
+        this.$emit('show-modal-modify', id);
+      },
+      showModalDelete(id) {
+        this.$emit('show-modal-delete', id);
+      }
+  }
 }
 </script>
 

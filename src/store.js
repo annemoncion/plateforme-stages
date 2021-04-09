@@ -30,7 +30,6 @@ export default new Vuex.Store({
     },
     modifyApplication (state, application) {
       // get index of object with param id
-      //const dataIndex = state.applications.map(function(application) { return application.id; }).indexOf(id);
       const dataIndex = state.applications.findIndex(x => x.id == application.id);
 
       // replace object with new data
@@ -42,6 +41,23 @@ export default new Vuex.Store({
 
       // remove object
       state.applications.splice(removeIndex, 1);
+    },
+    addInternship (state, internship) {
+      state.internships.push(internship)
+    },
+    modifyInternship (state, internship) {
+      // get index of object with param id
+      const dataIndex = state.internships.findIndex(x => x.id == internship.id);
+
+      // replace object with new data
+      state.internships.splice(dataIndex,1,internship);
+    },
+    deleteInternship (state, id) {
+      // get index of object with id property
+      const removeIndex = state.internships.map(function(internship) { return internship.id; }).indexOf(id);
+
+      // remove object
+      state.internships.splice(removeIndex, 1);
     }
   },
 
@@ -74,6 +90,15 @@ export default new Vuex.Store({
     },
     deleteApplication (context, id) {
       context.commit('deleteApplication', id)
+    },
+    addInternship (context, newData) {
+      context.commit('addInternship', newData)
+    },
+    modifyInternship (context, newData) {
+      context.commit('modifyInternship', newData)
+    },
+    deleteInternship (context, id) {
+      context.commit('deleteInternship', id)
     }
   }
 })

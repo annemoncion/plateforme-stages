@@ -25,7 +25,7 @@
             <b-container fluid>
                 <b-row>
                     <b-col class="admin__nav py-3">
-                        <button class="btn btn-outline-primary mr-1">
+                        <button class="btn btn-outline-primary mr-1" @click="showInternshipForm()">
                             <b-icon icon="plus"></b-icon>
                             Ajouter une offre de stage
                         </button>
@@ -54,9 +54,9 @@
 
                 <b-row class="admin__main">
                     <b-col class="admin__inside-main py-3">
-                        <keep-alive>
-                            <component :is="activeTab" />
-                        </keep-alive>
+                        <component 
+                            :is="activeTab" 
+                            @switch-tab="switchTab" />
                     </b-col>
                 </b-row>
             </b-container>
@@ -71,7 +71,8 @@ import BusinessList from '../components/dashboard/BusinessList'
 import CandidateList from '../components/dashboard/CandidateList'
 import InternshipList from '../components/dashboard/InternshipList'
 import Home from '../components/dashboard/Home'
-import NewPost from '../components/dashboard/NewPost'
+import NewApplication from '../components/dashboard/NewApplication'
+import NewInternship from '../components/dashboard/NewInternship'
 
 export default {
     name: 'Admin',
@@ -81,7 +82,8 @@ export default {
         CandidateList,
         InternshipList,
         Home,
-        NewPost,
+        NewApplication,
+        NewInternship
     },
     data() {
         return {
@@ -137,12 +139,23 @@ export default {
             }
             this.tabsItems[index].active = true;
             this.openedTab = component;
+            window.scrollTo(0, 0);
         },
         showApplicationForm() {
             for (let i = 0; i < this.tabsItems.length; i++) {
                 this.tabsItems[i].active = false;
             }
-            this.openedTab = "NewPost";
+            this.openedTab = "NewApplication";
+        },
+        showInternshipForm() {
+            for (let i = 0; i < this.tabsItems.length; i++) {
+                this.tabsItems[i].active = false;
+            }
+            this.openedTab = "NewInternship";
+        },
+        switchTab(tab) {
+            this.openedTab = tab;
+            window.scrollTo(0, 0);
         }
     }
 }

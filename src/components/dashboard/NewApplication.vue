@@ -1,10 +1,11 @@
 <template>
   <div>
         <h2 class="font-bold mt-2">
-            Demande de stage pour « {{ $v.form.title.$model }} »
+            Nouvelle demande de stage
+            <b-icon icon="arrow90deg-up" class="arrow-turned" font-scale="0.75" />
         </h2>
         
-        <b-form @submit.stop.prevent="onSubmit" v-if="show">
+        <b-form @submit.stop.prevent="onSubmit" @reset="resetForm" v-if="show">
 
             <!-- Titre de la demande -->
             <b-form-group id="title-input-group" label="Titre de la demande" label-for="title-input-group">
@@ -224,11 +225,11 @@
                 >Le maximum de 500 caractères a été dépassé.</b-form-invalid-feedback>
             </b-form-group>
 
-            <b-button type="submit" variant="primary" class="mr-1">Enregistrer</b-button>
-            <b-button variant="danger" @click="hideModal()">Fermer</b-button>
+            <b-button type="submit" variant="primary" class="mr-1">Soumettre</b-button>
+            <b-button type="reset" variant="danger">Réinitialiser</b-button>
     </b-form>
     <b-card class="mt-3" header="Form Data Result">
-        <pre class="m-0">{{ modifiedForm }}</pre>
+        <pre class="m-0">{{ form }}</pre>
     </b-card>
 
     </div>
@@ -239,13 +240,8 @@ import { validationMixin } from "vuelidate";
 import { required, minLength, maxLength, minValue, maxValue } from "vuelidate/lib/validators";
 
 export default {
-    name: "ModifyApplication",
+    name: "NewApplication",
     mixins: [validationMixin],
-    props: {
-        application: {
-            type: Object,
-        },
-    },
     data() {
         const now = new Date()
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
@@ -283,7 +279,7 @@ export default {
                 otherTrainings: '', 
                 internshipType: null,     
                 parutionDate: parutionDate,
-                authorID: '',
+                authorID: '87b6983b-6942-43bb-9142-c8c96fed30f5',
                 isActive: true,
                 isDeleted: false,
                 isValidated: false
@@ -323,32 +319,6 @@ export default {
         endDate() {
             return this.form.endDate
         },
-        modifiedForm() {
-            const form = {
-                id: this.application.id,
-                title: this.form.title,
-                field: this.form.field,
-                city: this.form.city,
-                startDate: this.form.startDate,
-                endDate: this.form.endDate,
-                description: this.form.description,
-                hoursPerWeek: this.form.hoursPerWeek,
-                acquiredSkillset: this.form.acquiredSkillset,
-                wantsPay: this.form.wantsPay,           
-                additionalInfos: this.form.additionalInfos,
-                weeksNumber: this.form.weeksNumber,
-                mainTraining: this.form.mainTraining,
-                otherTrainings: this.form.otherTrainings, 
-                internshipType: this.form.internshipType,     
-                parutionDate: this.application.parutionDate,
-                authorID: this.application.authorID,
-                isActive: this.application.isActive,
-                isDeleted: this.application.isDeleted,
-                isValidated: this.application.isValidated,
-            };
-
-            return form;
-        },
         
     },
     watch: {
@@ -369,21 +339,6 @@ export default {
         .then(() => {
             this.loading = false
         })
-    },
-    mounted () {
-        this.$v.form.title.$model = this.application.title
-        this.$v.form.field.$model = this.application.field
-        this.$v.form.city.$model = this.application.city
-        this.$v.form.startDate.$model = this.application.startDate
-        this.$v.form.endDate.$model = this.application.endDate
-        this.$v.form.description.$model = this.application.description
-        this.$v.form.hoursPerWeek.$model = this.application.hoursPerWeek
-        this.$v.form.acquiredSkillset.$model = this.application.acquiredSkillset
-        this.$v.form.wantsPay.$model = this.application.wantsPay
-        this.$v.form.additionalInfos.$model = this.application.additionalInfos
-        this.$v.form.mainTraining.$model = this.application.mainTraining
-        this.$v.form.otherTrainings.$model = this.application.otherTrainings
-        this.$v.form.internshipType.$model = this.application.internshipType
     },
     validations: {
         form: {
@@ -436,7 +391,7 @@ export default {
             },
             additionalInfos: {
                 maxLength: maxLength(500),
-            }
+            },
         }
     },
     methods: {
@@ -448,9 +403,38 @@ export default {
                 this.form.weeksNumber = 0;
             }  
         },
+        // Fonction pour générer un identifiant unique pour le mock API. Ne pas utiliser en production.
+        generateID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        },
         validateState(name) {
             const { $dirty, $error } = this.$v.form[name];
             return $dirty ? !$error : null;
+        },
+        resetForm() {
+            this.form = {
+                title: '',
+                field: null,
+                city: '',
+                startDate: null,
+                endDate: null,
+                description: '',
+                hoursPerWeek: null,
+                acquiredSkillset: '',
+                wantsPay: null,           
+                additionalInfos: '',
+                weeksNumber: 0,
+                mainTraining: '',
+                otherTrainings: '', 
+                internshipType: null
+            };
+
+            this.$nextTick(() => {
+                this.$v.$reset();
+            });
         },
         onSubmit() {
             this.$v.form.$touch();
@@ -458,12 +442,10 @@ export default {
 
                 return;
             }
-
-            this.$store.dispatch('modifyApplication', this.modifiedForm);
-            this.$emit('hide-modal-modify');
-        },
-        hideModal() {
-            this.$emit('hide-modal-modify');
+            // Append ID
+            this.form.id = this.generateID();
+            this.$store.dispatch('addApplication', this.form);
+            this.$emit('switch-tab', 'ApplicationList');
         }
     }
 }

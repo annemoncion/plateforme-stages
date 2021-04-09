@@ -9,7 +9,7 @@
            
             <div v-if="applications.length > 0">   
                 <TuileCandidat 
-                    v-for="application in applications" 
+                    v-for="application in sortedApplications" 
                     :key="application.id" 
                     :application="application" 
                     :isAdmin="true" 
@@ -58,6 +58,16 @@ export default {
     computed: {
         applications() {
             return this.$store.state.applications;
+        },
+        sortedApplications() {
+            let app = this.applications;
+            app.sort(function(a,b){
+                // Turn your strings into dates, and then subtract them
+                // to get a value that is either negative, positive, or zero.
+                return new Date(b.parutionDate) - new Date(a.parutionDate);
+            });
+
+            return app;
         },
         applicationToModify() {
             return this.application;

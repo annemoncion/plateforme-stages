@@ -1,14 +1,13 @@
 <template>
   <div>
         <h2 class="font-bold mt-2">
-            Demande de stage
-            <b-icon icon="arrow90deg-up" class="arrow-turned" font-scale="0.75" />
+            Offre de stage pour « {{ $v.form.title.$model }} »
         </h2>
         
-        <b-form @submit.stop.prevent="onSubmit" @reset="resetForm" v-if="show">
+        <b-form @submit.stop.prevent="onSubmit" v-if="show">
 
-            <!-- Titre de la demande -->
-            <b-form-group id="title-input-group" label="Titre de la demande" label-for="title-input-group">
+            <!-- Titre de l'offre -->
+            <b-form-group id="title-input-group" label="Titre de l'offre" label-for="title-input-group">
                 <b-form-input
                     id="title"
                     name="title"
@@ -105,7 +104,7 @@
             </b-form-group>
 
             <!-- Description -->
-            <b-form-group id="desc-input-group" label="Description de la demande" label-for="desc-input-group">
+            <b-form-group id="desc-input-group" label="Description de l'offre" label-for="desc-input-group">
                 <b-form-textarea
                     id="description"
                     name="description"
@@ -138,75 +137,45 @@
             </b-form-group>
 
             <!-- Rémunération -->
-            <b-form-group id="wants-pay-input-group" label="Le stage doit-il être rémunéré?" label-for="wants-pay-input-group">
+            <b-form-group id="is-paid-input-group" label="Rémunération" label-for="is-paid-input-group">
                 <b-form-select
-                    id="wantsPay"
-                    name="wantsPay"
-                    v-model="$v.form.wantsPay.$model"
+                    id="isPaid"
+                    name="isPaid"
+                    v-model="$v.form.isPaid.$model"
                     :options="salaries"
-                    :state="validateState('wantsPay')"
-                    aria-describedby="wants-pay-live-feedback"
+                    :state="validateState('isPaid')"
+                    aria-describedby="is-paid-live-feedback"
                 ></b-form-select>
 
-                <b-form-invalid-feedback id="wants-pay-live-feedback">Vous devez sélectionner une option.</b-form-invalid-feedback>
+                <b-form-invalid-feedback id="is-paid-live-feedback">Vous devez sélectionner une option.</b-form-invalid-feedback>
             </b-form-group>
 
-            <!-- Type de stage -->
-            <b-form-group id="internship-type-input-group" label="Type de stage" label-for="internship-type-input-group">
+            <!-- Possibilité d'embauche -->
+            <b-form-group id="hiring-input-group" label="Possibilité d'embauche après le stage" label-for="hiring-input-group">
                 <b-form-select
-                    id="internshipType"
-                    name="internshipType"
-                    v-model="$v.form.internshipType.$model"
-                    :options="internshipTypes"
-                    :state="validateState('internshipType')"
-                    aria-describedby="internship-type-live-feedback"
+                    id="hiringIsPossible"
+                    name="hiringIsPossible"
+                    v-model="$v.form.hiringIsPossible.$model"
+                    :options="hiringOptions"
+                    :state="validateState('hiringIsPossible')"
+                    aria-describedby="hiring-live-feedback"
                 ></b-form-select>
 
-                <b-form-invalid-feedback id="internship-type-live-feedback">Vous devez sélectionner une option.</b-form-invalid-feedback>
+                <b-form-invalid-feedback id="hiring-live-feedback">Vous devez sélectionner une option.</b-form-invalid-feedback>
             </b-form-group>
 
-            <!-- Formation principale -->
-            <b-form-group id="main-training-input-group" label="Nom de mon programme d'études" label-for="main-training-input-group">
-                <b-form-input
-                    id="mainTraining"
-                    name="mainTraining"
-                    v-model="$v.form.mainTraining.$model"
-                    :state="validateState('mainTraining')"
-                    aria-describedby="main-training-live-feedback"
-                    ></b-form-input>
-
-                <b-form-invalid-feedback
-                    id="main-training-live-feedback"
-                    >Ce champ est obligatoire et requiert un maximum de 120 caractères.</b-form-invalid-feedback>
-            </b-form-group>
-
-            <!-- Autres formations -->
-            <b-form-group id="other-trainings-input-group" label="Autres formations" label-for="other-trainings-input-group">
-                <b-form-input
-                    id="otherTrainings"
-                    name="otherTrainings"
-                    v-model="$v.form.otherTrainings.$model"
-                    :state="validateState('otherTrainings')"
-                    aria-describedby="other-trainings-live-feedback"
-                    ></b-form-input>
-
-                <b-form-invalid-feedback
-                    id="other-trainings-live-feedback"
-                    >Ce champ est obligatoire et requiert un maximun de 250 caractères.</b-form-invalid-feedback>
-            </b-form-group>
-
-            <!-- Compétences acquises -->
-            <b-form-group id="acquired-skillset-input-group" label="Compétences acquises" label-for="acquired-skillset-input-group">
+            <!-- Compétences recherchées -->
+            <b-form-group id="desired-skillset-input-group" label="Compétences recherchées" label-for="desired-skillset-input-group">
                 <b-form-textarea
-                    id="acquiredSkillset"
-                    name="acquiredSkillset"
-                    v-model="$v.form.acquiredSkillset.$model"
-                    :state="validateState('acquiredSkillset')"
-                    aria-describedby="acquired-skillset-live-feedback"
+                    id="desiredSkillset"
+                    name="desiredSkillset"
+                    v-model="$v.form.desiredSkillset.$model"
+                    :state="validateState('desiredSkillset')"
+                    aria-describedby="desired-skillset-live-feedback"
                     ></b-form-textarea>
 
                 <b-form-invalid-feedback
-                    id="acquired-skillset-live-feedback"
+                    id="desired-skillset-live-feedback"
                     >Ce champ est obligatoire et requiert un maximum de 250 caractères.</b-form-invalid-feedback>
             </b-form-group>
 
@@ -225,11 +194,11 @@
                 >Le maximum de 500 caractères a été dépassé.</b-form-invalid-feedback>
             </b-form-group>
 
-            <b-button type="submit" variant="primary" class="mr-1">Soumettre</b-button>
-            <b-button type="reset" variant="danger">Réinitialiser</b-button>
+            <b-button type="submit" variant="primary" class="mr-1">Enregistrer</b-button>
+            <b-button variant="danger" @click="hideModal()">Fermer</b-button>
     </b-form>
     <b-card class="mt-3" header="Form Data Result">
-        <pre class="m-0">{{ form }}</pre>
+        <pre class="m-0">{{ modifiedForm }}</pre>
     </b-card>
 
     </div>
@@ -240,8 +209,13 @@ import { validationMixin } from "vuelidate";
 import { required, minLength, maxLength, minValue, maxValue } from "vuelidate/lib/validators";
 
 export default {
-    name: "NewPost",
+    name: "ModifyInternship",
     mixins: [validationMixin],
+    props: {
+        internship: {
+            type: Object,
+        },
+    },
     data() {
         const now = new Date()
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
@@ -271,18 +245,16 @@ export default {
                 endDate: null,
                 description: '',
                 hoursPerWeek: null,
-                acquiredSkillset: '',
-                wantsPay: null,           
+                desiredSkillset: '',
+                hiringIsPossible: null,           
                 additionalInfos: '',
                 weeksNumber: 0,
-                mainTraining: '',
-                otherTrainings: '', 
-                internshipType: null,     
+                isPaid: '',
                 parutionDate: parutionDate,
                 authorID: '87b6983b-6942-43bb-9142-c8c96fed30f5',
                 isActive: true,
                 isDeleted: false,
-                isValidated: false
+                isValidated: false,
             },
             show: true,
             loading: false,
@@ -293,13 +265,11 @@ export default {
                 {text: "Sélectionnez", value: null},
                 {text: "Oui", value: "Oui"},
                 {text: "Non", value: "Non"},
-                {text: "À la discrétion de l'employeur", value: "À la discrétion de l'employeur"},
             ],
-            internshipTypes: [
+            hiringOptions: [
                 {text: "Sélectionnez", value: null},
-                {text: "Temps plein", value: "Temps plein"},
-                {text: "Temps partiel", value: "Temps partiel"},
-                {text: "Alternance travail/études", value: "Alternance travail/études"},
+                {text: "Oui", value: "Oui"},
+                {text: "Non", value: "Non"},
             ]
         }
     },
@@ -318,6 +288,30 @@ export default {
         },
         endDate() {
             return this.form.endDate
+        },
+        modifiedForm() {
+            const form = {
+                id: this.internship.id,
+                title: this.form.title,
+                field: this.form.field,
+                city: this.form.city,
+                startDate: this.form.startDate,
+                endDate: this.form.endDate,
+                description: this.form.description,
+                hoursPerWeek: this.form.hoursPerWeek,
+                desiredSkillset: this.form.desiredSkillset,
+                isPaid: this.form.isPaid,           
+                additionalInfos: this.form.additionalInfos,
+                weeksNumber: this.form.weeksNumber,
+                hiringIsPossible: this.form.hiringIsPossible,     
+                parutionDate: this.internship.parutionDate,
+                authorID: this.internship.authorID,
+                isActive: this.internship.isActive,
+                isDeleted: this.internship.isDeleted,
+                isValidated: this.internship.isValidated,
+            };
+
+            return form;
         },
         
     },
@@ -339,6 +333,19 @@ export default {
         .then(() => {
             this.loading = false
         })
+    },
+    mounted () {
+        this.$v.form.title.$model = this.internship.title
+        this.$v.form.field.$model = this.internship.field
+        this.$v.form.city.$model = this.internship.city
+        this.$v.form.startDate.$model = this.internship.startDate
+        this.$v.form.endDate.$model = this.internship.endDate
+        this.$v.form.description.$model = this.internship.description
+        this.$v.form.hoursPerWeek.$model = this.internship.hoursPerWeek
+        this.$v.form.desiredSkillset.$model = this.internship.desiredSkillset
+        this.$v.form.isPaid.$model = this.internship.isPaid
+        this.$v.form.additionalInfos.$model = this.internship.additionalInfos
+        this.$v.form.hiringIsPossible.$model = this.internship.hiringIsPossible
     },
     validations: {
         form: {
@@ -371,21 +378,13 @@ export default {
                 minValue: minValue(5),
                 maxValue: maxValue(40)
             },
-            wantsPay: {
+            isPaid: {
                 required,
             },
-            internshipType: {
+            hiringIsPossible: {
                 required,
             },
-            mainTraining: {
-                required,
-                maxLength: maxLength(120),
-            },
-            otherTrainings: {
-                required,
-                maxLength: maxLength(250),
-            },
-            acquiredSkillset: {
+            desiredSkillset: {
                 required,
                 maxLength: maxLength(250),
             },
@@ -403,38 +402,9 @@ export default {
                 this.form.weeksNumber = 0;
             }  
         },
-        // Fonction pour générer un identifiant unique pour le mock API. Ne pas utiliser en production.
-        generateID() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
-            });
-        },
         validateState(name) {
             const { $dirty, $error } = this.$v.form[name];
             return $dirty ? !$error : null;
-        },
-        resetForm() {
-            this.form = {
-                title: '',
-                field: null,
-                city: '',
-                startDate: null,
-                endDate: null,
-                description: '',
-                hoursPerWeek: null,
-                acquiredSkillset: '',
-                wantsPay: null,           
-                additionalInfos: '',
-                weeksNumber: 0,
-                mainTraining: '',
-                otherTrainings: '', 
-                internshipType: null
-            };
-
-            this.$nextTick(() => {
-                this.$v.$reset();
-            });
         },
         onSubmit() {
             this.$v.form.$touch();
@@ -442,10 +412,12 @@ export default {
 
                 return;
             }
-            // Append ID + send form to mock api application.json
-            this.form.id = this.generateID();
-            this.$store.dispatch('addApplication', this.form);
-            alert("Le formulaire a bel et bien été envoyé.");
+
+            this.$store.dispatch('modifyInternship', this.modifiedForm);
+            this.$emit('hide-modal-modify');
+        },
+        hideModal() {
+            this.$emit('hide-modal-modify');
         }
     }
 }
