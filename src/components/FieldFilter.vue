@@ -7,6 +7,12 @@
 
         <ul class="filter__list">
             <li
+                class="filter__item filter__item--no-filter" 
+                :class="{'is-active' : noActiveFilter}"
+                @click="clearFilter()">
+                    <strong>Tous les secteurs</strong>
+            </li>
+            <li
                 v-for="field, k in fields" 
                 :key="k"
                 class="filter__item" 
@@ -25,12 +31,16 @@ export default {
   name: 'FieldFilter',
   data() {
       return {
-          loading: false
+          loading: false,
+          noFilter: true,
       }
   },
   computed: {
     fields () {
       return this.$store.state.fields
+    },
+    noActiveFilter () {
+        return this.noFilter
     }
   },
   created () {
@@ -45,8 +55,17 @@ export default {
           for (let i = 0; i < this.fields.length; i++) {
               this.fields[i].isActive = false;
           }
+          this.noFilter = false;
           this.fields[index].isActive = true;
-      }
+          this.$emit('filter-data', this.fields[index].title);
+      },
+      clearFilter() {
+          for (let i = 0; i < this.fields.length; i++) {
+              this.fields[i].isActive = false;
+          }
+          this.noFilter = true;
+          this.$emit('filter-data', '');
+      },
   }
 }
 </script>
@@ -107,6 +126,11 @@ export default {
 
         &.is-active {
             border-left: 6px solid $fushia;
+        }
+
+        &--no-filter {
+            color: $purple;
+            font-size: 1.1em;
         }
     }
 

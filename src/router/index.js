@@ -8,6 +8,8 @@ const Admin = () =>
   import(/* webpackChunkName: "admin" */ "../views/Admin.vue");
 const APropos = () =>
   import(/* webpackChunkName: "aPropos" */ "../views/APropos.vue");
+const Connexion = () =>
+  import(/* webpackChunkName: "connexion" */ "../views/Connexion.vue");
 const Demandes = () =>
   import(/* webpackChunkName: "demandes" */ "../views/Demandes.vue");
 const DetailDemande = () =>
@@ -36,12 +38,6 @@ const routes = [
     path: "/mon-portail",
     name: "admin",
     component: Admin,
-    meta: {
-      breadcrumb: [
-        { name: 'Accueil', link: '/' },
-        { name: 'Admin' }
-      ]
-    }
   },
   {
     path: "/a-propos",
@@ -53,6 +49,11 @@ const routes = [
         { name: 'À propos' }
       ]
     }
+  },
+  {
+    path: "/connexion",
+    name: "connexion",
+    component: Connexion,
   },
   {
     path: "/demandes-de-stage",
@@ -72,7 +73,6 @@ const routes = [
     props: {
       default: true,
       // function mode, more about it below
-      application: route => ({ application: route.params.application }),
       id: route => ({ id: route.params.id }),
     },
     meta: {
@@ -90,7 +90,6 @@ const routes = [
     props: {
       default: true,
       // function mode, more about it below
-      internship: route => ({ internship: route.params.internship }),
       id: route => ({ id: route.params.id }),
     },
     meta: {

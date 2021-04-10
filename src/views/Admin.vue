@@ -1,67 +1,76 @@
 <template>
     <div>
-        <div class="admin__tabs">
-            <router-link to="/"><img class="admin__logo" :src="require('@/assets/img/logoipsum.svg')" alt="Logo E-Stage" /></router-link>
+        <Loading v-if="loading" />
+        <div v-if="!loading">
+            <div v-if="currentUser" class="admin__tabs">
+                <router-link to="/"><img class="admin__logo" :src="require('@/assets/img/logoipsum.svg')" alt="Logo E-Stage" /></router-link>
 
-            <ul class="admin__tabs-list mt-3">
-                <li 
-                v-for="item, k in tabsItems" 
-                :key="k" 
-                class="admin__tabs-item"
-                :class="{'admin__tabs-item--active' : item.active}"
-                @click="changeTab(k, item.component)"
-                >
-                    <b-icon :icon="item.icon" class="mr-1"></b-icon>
-                    {{ item.name }}
-                </li>
-                <li class="admin__tabs-item mt-4">
-                    <b-icon icon="arrow-bar-right" class="mr-1" />
-                    Déconnexion
-                </li>
-            </ul>
-        </div>
+                <ul class="admin__tabs-list mt-3">
+                    <li 
+                    v-for="item, k in tabsItems" 
+                    :key="k" 
+                    class="admin__tabs-item"
+                    :class="[{'admin__tabs-item--active' : item.active}, {'admin__tabs-item--hidden' : hideTab(currentUser.accessLevel, item.name)}]"
+                    @click="changeTab(k, item.component)"
+                    >
+                        <b-icon :icon="item.icon" class="mr-1"></b-icon>
+                        {{ item.name }}
+                    </li>
+                    <li class="admin__tabs-item mt-4" @click="deconnexion()">
+                        <b-icon icon="arrow-bar-right" class="mr-1" />
+                        Déconnexion
+                    </li>
+                </ul>
+            </div>
 
-        <div class="admin__content">
-            <b-container fluid>
-                <b-row>
-                    <b-col class="admin__nav py-3">
-                        <button class="btn btn-outline-primary mr-1" @click="showInternshipForm()">
-                            <b-icon icon="plus"></b-icon>
-                            Ajouter une offre de stage
-                        </button>
-                        <button class="btn btn-outline-primary" @click="showApplicationForm()">
-                            <b-icon icon="plus"></b-icon>
-                            Ajouter une demande de stage
-                        </button>
-                        <div class="admin__right-nav">
-                            <div tabindex="1" class="admin__profile-btn px-3 mx-3">
-                                <div class="admin__profile-title mr-2">
-                                    <p class="admin__profile-name mb-0">John Doe</p>
-                                    <p class="admin__profile-role mb-0">Admin</p>
+            <div class="admin__content">
+                <b-container fluid>
+                    <b-row>
+                        <b-col class="admin__nav py-3">
+                            <button 
+                                v-if="currentUser.accessLevel === 333 || currentUser.accessLevel === 999" 
+                                class="btn btn-outline-primary mr-1" 
+                                @click="showInternshipForm()">
+                                    <b-icon icon="plus"></b-icon>
+                                    Ajouter une offre de stage
+                            </button>
+                            <button 
+                                v-if="currentUser.accessLevel === 111 || currentUser.accessLevel === 999" 
+                                class="btn btn-outline-primary" 
+                                @click="showApplicationForm()">
+                                    <b-icon icon="plus"></b-icon>
+                                    Ajouter une demande de stage
+                            </button>
+                            <div class="admin__right-nav">
+                                <div tabindex="1" class="admin__profile-btn px-3 mx-3">
+                                    <div v-if="currentUser" class="admin__profile-title mr-2">
+                                        <p class="admin__profile-name mb-0">{{currentUser.firstName + ' ' + currentUser.lastName}}</p>
+                                        <p class="admin__profile-role mb-0">{{role}}</p>
+                                    </div>
+                                    <div class="admin__profile-picture mr-2"></div>
+                                    <b-icon icon="chevron-down"></b-icon>
                                 </div>
-                                <div class="admin__profile-picture mr-2"></div>
-                                <b-icon icon="chevron-down"></b-icon>
+                                <div class="admin__icon-right mr-3">
+                                    <b-icon icon="bell" font-scale="1.25" />
+                                </div>
+                                <div class="admin__icon-right" @click="deconnexion()">
+                                    <b-icon icon="arrow-bar-right" font-scale="1.25" />
+                                </div>
                             </div>
-                            <div class="admin__icon-right mr-3">
-                                <b-icon icon="bell" font-scale="1.25" />
-                            </div>
-                            <div class="admin__icon-right">
-                                <b-icon icon="arrow-bar-right" font-scale="1.25" />
-                            </div>
-                        </div>
-                    </b-col>
-                </b-row>
+                        </b-col>
+                    </b-row>
 
-                <b-row class="admin__main">
-                    <b-col class="admin__inside-main py-3">
-                        <component 
-                            :is="activeTab" 
-                            @switch-tab="switchTab" />
-                    </b-col>
-                </b-row>
-            </b-container>
-            
-        </div>
+                    <b-row class="admin__main">
+                        <b-col class="admin__inside-main py-3">
+                            <component 
+                                :is="activeTab"
+                                @switch-tab="switchTab" />
+                        </b-col>
+                    </b-row>
+                </b-container>
+                
+            </div>
+        </div>  
   </div>
 </template>
 
@@ -71,6 +80,7 @@ import BusinessList from '../components/dashboard/BusinessList'
 import CandidateList from '../components/dashboard/CandidateList'
 import InternshipList from '../components/dashboard/InternshipList'
 import Home from '../components/dashboard/Home'
+import Loading from '../components/Loading'
 import NewApplication from '../components/dashboard/NewApplication'
 import NewInternship from '../components/dashboard/NewInternship'
 
@@ -82,12 +92,14 @@ export default {
         CandidateList,
         InternshipList,
         Home,
+        Loading,
         NewApplication,
         NewInternship
     },
     data() {
         return {
             openedTab: "Home",
+            loading: false,
             tabsItems: [
                 {
                     name: "Accueil",
@@ -130,7 +142,33 @@ export default {
     computed: {
         activeTab() {
             return this.openedTab;
+        },
+        currentUser () {
+            return this.$store.getters.currentUser(localStorage.userID);
+        },
+        role () {
+            let role = '';
+            let access = this.currentUser.accessLevel;
+            if (access === 111) {
+                role = 'Stagiaire';
+            }
+            else if (access === 333) {
+                role = this.currentUser.businessName;
+            }
+            else {
+                role = 'Admin';
+            }
+            return role;
         }
+    },
+    created () {
+        this.loading = true
+        this.$store.dispatch('fetchApplications')
+        this.$store.dispatch('fetchInternships')
+        this.$store.dispatch('fetchUsers')
+        .then(() => {
+            this.loading = false
+        })
     },
     methods: {
         changeTab(index, component) {
@@ -140,6 +178,21 @@ export default {
             this.tabsItems[index].active = true;
             this.openedTab = component;
             window.scrollTo(0, 0);
+        },
+        hideTab(access, tabName) {
+            if (access === 111) {
+                if (tabName === "Offres de stage" || tabName === "Candidats" || tabName === "Entreprises") {
+                    return true;
+                }
+            }
+            else if (access === 333) {
+                if (tabName === "Demandes de stage" || tabName === "Entreprises") {
+                    return true;
+                }
+            }
+            else {
+                return false;
+            }
         },
         showApplicationForm() {
             for (let i = 0; i < this.tabsItems.length; i++) {
@@ -156,6 +209,11 @@ export default {
         switchTab(tab) {
             this.openedTab = tab;
             window.scrollTo(0, 0);
+        },
+        deconnexion() {
+            localStorage.removeItem('userID');
+            localStorage.removeItem('userAccessLevel');
+            this.$router.push('/');
         }
     }
 }
@@ -204,6 +262,11 @@ export default {
         &--active {
             border-left: solid 6px rgba(255,255,255, 0.4);
         }
+
+        &--hidden {
+            display: none;
+        }
+
 
         &:before {
             display: none;

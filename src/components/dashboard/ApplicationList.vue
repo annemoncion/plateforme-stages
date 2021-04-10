@@ -18,6 +18,10 @@
                     @show-modal-delete="showModalDelete" />
             </div>
 
+            <div v-else>
+                <p>Vous n'avez aucune demande de stage active.</p>
+            </div>
+
             <b-modal ref="modal-modify" hide-footer title="Modifier ma demande">
                 <div class="d-block text-center">
                     <ModifyApplication 
@@ -57,7 +61,12 @@ export default {
     },
     computed: {
         applications() {
-            return this.$store.state.applications;
+            if (localStorage.userAccessLevel === "111") {
+                return this.$store.getters.applicationsByUser(localStorage.userID);
+            }
+            else {
+                return this.$store.state.applications;
+            } 
         },
         sortedApplications() {
             let app = this.applications;
@@ -72,13 +81,6 @@ export default {
         applicationToModify() {
             return this.application;
         },
-    },
-    mounted () {
-        this.loading = true
-        this.$store.dispatch('fetchApplications')
-        .then(() => {
-            this.loading = false
-        })
     },
     methods: {
         showModalModify(id) {

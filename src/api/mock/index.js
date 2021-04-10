@@ -16,12 +16,12 @@ export default {
     return fetch(applications, 1000) // wait 1s before returning applications
   },
   fetchFields () {
-    return fetch(fields, 100) // wait 0.1s before returning fields
+    return fetch(fields, 1000) // wait 0.1s before returning fields
   },
   fetchInternships () {
-    return fetch(internships, 100) // wait 0.1s before returning internships
+    return fetch(internships, 1000) // wait 0.1s before returning internships
   },
   fetchUsers () {
-    return fetch(users, 100) // wait 0.1s before returning users
+    return fetch(users, 1000) // wait 0.1s before returning users
   },
 }

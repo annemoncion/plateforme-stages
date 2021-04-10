@@ -12,6 +12,24 @@ export default new Vuex.Store({
     users: [],
   },
 
+  getters: {
+    currentUser: (state) => (id) => {
+      return state.users.find(user => user.id === id)
+    },
+    applicationsByUser: (state) => (id) => {
+      return state.applications.filter(application => application.authorID === id)
+    },
+    internshipsByUser: (state) => (id) => {
+      return state.internships.filter(internship => internship.authorID === id)
+    },
+    applicationsByField: (state) => (field) => {
+      return state.applications.filter(application => application.field === field)
+    },
+    internshipsByField: (state) => (field) => {
+      return state.internships.filter(internship => internship.field === field)
+    }
+  },
+
   mutations: {
     setApplications (state, applications) {
       state.applications = applications
@@ -58,7 +76,10 @@ export default new Vuex.Store({
 
       // remove object
       state.internships.splice(removeIndex, 1);
-    }
+    },
+    addUser (state, user) {
+      state.users.push(user)
+    },
   },
 
   actions: {
@@ -99,6 +120,9 @@ export default new Vuex.Store({
     },
     deleteInternship (context, id) {
       context.commit('deleteInternship', id)
-    }
+    },
+    addUser (context, newData) {
+      context.commit('addUser', newData)
+    },
   }
 })

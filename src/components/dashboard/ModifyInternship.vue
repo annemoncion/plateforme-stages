@@ -197,11 +197,7 @@
             <b-button type="submit" variant="primary" class="mr-1">Enregistrer</b-button>
             <b-button variant="danger" @click="hideModal()">Fermer</b-button>
     </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-        <pre class="m-0">{{ modifiedForm }}</pre>
-    </b-card>
-
-    </div>
+  </div>
 </template>
 
 <script>

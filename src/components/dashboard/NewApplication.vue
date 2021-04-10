@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-5">
         <h2 class="font-bold mt-2">
             Nouvelle demande de stage
             <b-icon icon="arrow90deg-up" class="arrow-turned" font-scale="0.75" />
@@ -187,7 +187,7 @@
                     name="otherTrainings"
                     v-model="$v.form.otherTrainings.$model"
                     :state="validateState('otherTrainings')"
-                    aria-describedby="other-trainings-live-feedback"
+                    aria-describedby="other-trainings-live-feedback" 
                     ></b-form-input>
 
                 <b-form-invalid-feedback
@@ -228,11 +228,7 @@
             <b-button type="submit" variant="primary" class="mr-1">Soumettre</b-button>
             <b-button type="reset" variant="danger">Réinitialiser</b-button>
     </b-form>
-    <b-card class="mt-3" header="Form Data Result">
-        <pre class="m-0">{{ form }}</pre>
-    </b-card>
-
-    </div>
+  </div>
 </template>
 
 <script>
@@ -450,3 +446,11 @@ export default {
     }
 }
 </script>
+
+<style scoped lang="scss">
+@import '@/assets/style/_variables.scss';
+
+form {
+    max-width: 800px;
+}
+</style>

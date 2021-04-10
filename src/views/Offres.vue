@@ -8,12 +8,17 @@
             <b-row class="mt-3">
                 <b-col md="8">
                     <Breadcrumbs />
-                    <div v-for="internship in internships" :key="internship.id" class="mb-3">
-                        <Stage :internship="internship" />
+                    <div v-if="internships.length > 0">
+                        <div v-for="internship in internships" :key="internship.id" class="mb-3">
+                            <Stage :internship="internship" />
+                        </div>
+                    </div>
+                    <div v-else>
+                        <p>Aucune offre n'est présentement disponible dans ce secteur.</p>
                     </div>
                 </b-col>
                 <b-col md="4">
-                    <FieldFilter />
+                    <FieldFilter @filter-data="filterInternships" />
                 </b-col>
             </b-row>
         </b-container>
@@ -80,11 +85,20 @@ export default {
             pingPongSecond: require('@/assets/img/pingpong1.jpg'),
             urlStart: "--bg-ping-pong: url('",
             urlEnd: "')",
+            filter: {
+                field: "",
+                active: false
+            }
         }
     },
     computed: {
         internships () {
-        return this.$store.state.internships
+            if (this.filter.active) {
+                return this.$store.getters.internshipsByField(this.filter.field)
+            }
+            else {
+                return this.$store.state.internships
+            }
         }
     },
     created () {
@@ -94,6 +108,17 @@ export default {
             this.loading = false
         })
     },
+    methods: {
+        filterInternships(field) {
+            if (field.length > 0) {
+                this.filter.field = field;
+                this.filter.active = true; 
+            }
+            else {
+                this.filter.active = false;
+            }
+        }
+    }
 }
 </script>
 

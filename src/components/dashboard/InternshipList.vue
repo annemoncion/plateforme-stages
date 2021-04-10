@@ -18,6 +18,10 @@
                     @show-modal-delete="showModalDelete" />
             </div>
 
+            <div v-else>
+                <p>Vous n'avez aucune demande de stage active.</p>
+            </div>
+
             <b-modal ref="modal-modify" hide-footer title="Modifier mon offre">
                 <div class="d-block text-center">
                     <ModifyInternship 
@@ -57,7 +61,12 @@ export default {
     },
     computed: {
         internships() {
-            return this.$store.state.internships;
+            if (localStorage.userAccessLevel === "333") {
+                return this.$store.getters.internshipsByUser(localStorage.userID);
+            }
+            else {
+                return this.$store.state.internships;
+            }  
         },
         internshipToModify() {
             return this.internship;
@@ -72,13 +81,6 @@ export default {
 
             return intern;
         },
-    },
-    created () {
-        this.loading = true
-        this.$store.dispatch('fetchInternships')
-        .then(() => {
-            this.loading = false
-        })
     },
     methods: {
         showModalModify(id) {

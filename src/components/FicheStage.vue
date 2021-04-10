@@ -1,5 +1,5 @@
 <template>
-    <div class="fiche">
+    <div class="fiche" v-if="internship">
         <div class="fiche__header">
             <div class="fiche__first-block">
                 <img class="fiche__logo" :src="logoSchool" alt="logo de l'établissement" />

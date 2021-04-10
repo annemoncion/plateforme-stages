@@ -78,13 +78,29 @@ export default {
             pingPongSecond: require('@/assets/img/pingpong4.jpg'),
             urlStart: "--bg-ping-pong: url('",
             urlEnd: "')",
+            loading: false,
+            currentApplication: [],
         }
     },
     computed: {
         application() {
-            return this.$route.params.application;
+            let id = this.$route.params.id
+            let applications = this.$store.state.applications
+            // Search application with route id param
+            let currentApplication = applications.filter(function (el) {
+                return el.id === id;
+                }
+            );
+            return currentApplication[0];
         }
-    }
+    },
+    created () {
+        this.loading = true
+        this.$store.dispatch('fetchApplications')
+        .then(() => {
+            this.loading = false
+        })     
+    },
 }
 </script>
 

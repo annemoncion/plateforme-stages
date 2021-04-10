@@ -15,8 +15,8 @@
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto header__nav-block">
-            <router-link to="/admin" class="a-btn-primary a-btn-primary--white a-btn-primary--rounded">Connexion</router-link>
-            <router-link to="/admin" class="a-btn-primary a-btn-primary--grey a-btn-primary--rounded">Inscription</router-link>
+            <router-link :to="connexion" class="a-btn-primary a-btn-primary--white a-btn-primary--rounded">Connexion</router-link>
+            <router-link :to="connexion" class="a-btn-primary a-btn-primary--grey a-btn-primary--rounded">Inscription</router-link>
           </b-navbar-nav>
 
         </b-collapse>
@@ -28,6 +28,11 @@
 <script>
 export default {
   name: 'Header',
+  computed: {
+    connexion() {
+      return localStorage.userID ? '/mon-portail' : '/connexion'
+    }
+  }
 }
 </script>
 

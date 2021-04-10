@@ -78,13 +78,29 @@ export default {
             pingPongSecond: require('@/assets/img/pingpong4.jpg'),
             urlStart: "--bg-ping-pong: url('",
             urlEnd: "')",
+            loading: false,
+            currentApplication: [],
         }
     },
     computed: {
         internship() {
-            return this.$route.params.internship;
+            let id = this.$route.params.id
+            let internships = this.$store.state.internships
+            // Search internship with route id param
+            let currentInternship = internships.filter(function (el) {
+                return el.id === id;
+                }
+            );
+            return currentInternship[0];
         }
-    }
+    },
+    created () {
+        this.loading = true
+        this.$store.dispatch('fetchInternships')
+        .then(() => {
+            this.loading = false
+        })     
+    },
 }
 </script>
 
