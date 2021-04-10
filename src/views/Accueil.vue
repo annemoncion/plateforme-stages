@@ -10,7 +10,7 @@
         <ul class="mb-3">
             <li>Donec facilisis at velit vitae rhoncus</li>
             <li>In faucibus orci luctus et ultrices</li>
-            <li>Ipsum primis in faucibus orci luctus</li>
+            <li>Ipsum primis in faucibus orci luctus testo</li>
         </ul>
         <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple mt-3">Publier une offre maintenant!</router-link>
         <template v-slot:image>
