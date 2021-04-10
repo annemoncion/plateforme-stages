@@ -60,8 +60,8 @@ export default {
     },
     data() {
         return {
-            pingPongFirst: require('@/assets/img/pingpong1.jpg'),
-            pingPongSecond: require('@/assets/img/pingpong2.jpg'),
+            pingPongFirst: require('../assets/img/pingpong1.jpg'),
+            pingPongSecond: require('../assets/img/pingpong2.jpg'),
             urlStart: "--bg-ping-pong: url('",
             urlEnd: "')",
         }

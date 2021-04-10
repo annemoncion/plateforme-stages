@@ -72,7 +72,6 @@ const routes = [
     component: DetailDemande,
     props: {
       default: true,
-      // function mode, more about it below
       id: route => ({ id: route.params.id }),
     },
     meta: {
@@ -89,7 +88,6 @@ const routes = [
     component: DetailOffre,
     props: {
       default: true,
-      // function mode, more about it below
       id: route => ({ id: route.params.id }),
     },
     meta: {
