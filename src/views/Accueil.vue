@@ -12,7 +12,7 @@
             <li>In faucibus orci luctus et ultrices</li>
             <li>Ipsum primis in faucibus orci luctus</li>
         </ul>
-        <a class="a-btn-primary a-btn-primary--purple mt-3">Publier une offre maintenant!</a>
+        <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple mt-3">Publier une offre maintenant!</router-link>
         <template v-slot:image>
             <div :style="urlStart + pingPongFirst + urlEnd"></div>
         </template>
@@ -28,7 +28,7 @@
             <li>In faucibus orci luctus et ultrices</li>
             <li>Ipsum primis in faucibus orci luctus</li>
         </ul>
-        <a class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</a>
+        <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</router-link>
         <template v-slot:image>
             <div :style="urlStart + pingPongSecond + urlEnd"></div>
         </template>
@@ -66,6 +66,11 @@ export default {
             urlEnd: "')",
         }
     },
+    computed: {
+        connexion() {
+            return localStorage.userID ? '/mon-portail' : '/connexion'
+        }
+    }
 }
 </script>
 

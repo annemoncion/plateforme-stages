@@ -1,7 +1,7 @@
 <template>
   <b-container fluid class="pingpong my-4">
     <b-row class="pingpong__row" :class="rowReverse">
-        <b-col md="6" class="pingpong__content p-5">
+        <b-col md="6" class="pingpong__content px-2 py-4 p-lg-5">
             <div class="pingpong__text">
                 <h2 class="mb-3 pingpong__title"><slot name="title"></slot></h2>
                 <slot></slot>
@@ -51,8 +51,12 @@ export default {
     }
 
     &__title {
-        font-size: 3.2em;
+        font-size: 2.2em;
         font-weight: 700;
+
+        @media (min-width: $md) {
+            font-size: 3.2em;
+        }
     }
 
     &__text {
@@ -61,7 +65,11 @@ export default {
 
     &__image {
         position: relative;
-        min-height: 560px;
+        min-height: 260px;
+
+        @media (min-width: $md) {
+            min-height: 560px;
+        }
 
         div {
             background-image: var(--bg-ping-pong), none;

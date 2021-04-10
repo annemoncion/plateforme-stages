@@ -16,18 +16,33 @@ export default new Vuex.Store({
     currentUser: (state) => (id) => {
       return state.users.find(user => user.id === id)
     },
+    userByPost: (state) => (authorID) => {
+      return state.users.find(user => user.id === authorID)
+    },
+    publicApplications: (state) => {
+      return state.applications.filter(application => application.isValidated && !application.isDeleted)
+    },
+    publicInternships: (state) => {
+      return state.internships.filter(internship => internship.isValidated && !internship.isDeleted)
+    },
+    applicationByID: (state) => (id) => {
+      return state.applications.find(application => application.id === id)
+    },
     applicationsByUser: (state) => (id) => {
-      return state.applications.filter(application => application.authorID === id)
+      return state.applications.filter(application => application.authorID === id && !application.isDeleted)
+    },
+    internshipByID: (state) => (id) => {
+      return state.internships.find(internship => internship.id === id)
     },
     internshipsByUser: (state) => (id) => {
-      return state.internships.filter(internship => internship.authorID === id)
+      return state.internships.filter(internship => internship.authorID === id && !internship.isDeleted)
     },
     applicationsByField: (state) => (field) => {
-      return state.applications.filter(application => application.field === field)
+      return state.applications.filter(application => application.field === field && application.isValidated && !application.isDeleted)
     },
     internshipsByField: (state) => (field) => {
-      return state.internships.filter(internship => internship.field === field)
-    }
+      return state.internships.filter(internship => internship.field === field && internship.isValidated && !internship.isDeleted)
+    },
   },
 
   mutations: {
@@ -54,11 +69,10 @@ export default new Vuex.Store({
       state.applications.splice(dataIndex,1,application);
     },
     deleteApplication (state, id) {
-      // get index of object with id property
-      const removeIndex = state.applications.map(function(application) { return application.id; }).indexOf(id);
-
-      // remove object
-      state.applications.splice(removeIndex, 1);
+      // get index of object with param id
+      const dataIndex = state.applications.findIndex(x => x.id == id);
+      // set isDeleted to true
+      state.applications[dataIndex].isDeleted = true;
     },
     addInternship (state, internship) {
       state.internships.push(internship)
@@ -71,11 +85,16 @@ export default new Vuex.Store({
       state.internships.splice(dataIndex,1,internship);
     },
     deleteInternship (state, id) {
+      // Code used eventually to deleted permanently from store:
       // get index of object with id property
-      const removeIndex = state.internships.map(function(internship) { return internship.id; }).indexOf(id);
-
+      // const removeIndex = state.internships.map(function(internship) { return internship.id; }).indexOf(id);
       // remove object
-      state.internships.splice(removeIndex, 1);
+      // state.internships.splice(removeIndex, 1);
+
+      // get index of object with param id
+      const dataIndex = state.internships.findIndex(x => x.id == id);
+      // set isDeleted to true
+      state.internships[dataIndex].isDeleted = true;
     },
     addUser (state, user) {
       state.users.push(user)

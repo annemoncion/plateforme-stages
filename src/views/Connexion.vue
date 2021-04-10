@@ -6,7 +6,7 @@
 
         <b-container class="mb-5">
             <b-row class="mt-3">
-                <b-col md="4">
+                <b-col md="4" class="mb-4">
                    <h2 class="font-bold mt-2">Identification</h2>
 
                    <b-form @submit.stop.prevent="onSubmit" v-if="show">

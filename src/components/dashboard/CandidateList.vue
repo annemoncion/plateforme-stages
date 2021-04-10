@@ -42,7 +42,7 @@ export default {
           }
 
           return candidates;
-        }
+        },
     },
     created () {
         this.loading = true

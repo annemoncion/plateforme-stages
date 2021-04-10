@@ -243,7 +243,7 @@ export default {
                 weeksNumber: 0,
                 isPaid: '',
                 parutionDate: parutionDate,
-                authorID: '87b6983b-6942-43bb-9142-c8c96fed30f5',
+                authorID: '',
                 isActive: true,
                 isDeleted: false,
                 isValidated: false,
@@ -281,7 +281,9 @@ export default {
         endDate() {
             return this.form.endDate
         },
-        
+        currentUser() {
+            return this.$store.getters.currentUser(localStorage.userID);
+        }  
     },
     watch: {
         endDate(value){
@@ -396,6 +398,9 @@ export default {
             }
             // Append ID
             this.form.id = this.generateID();
+            // Add author ID
+            this.form.authorID = this.currentUser.id;
+            // Add new data to store
             this.$store.dispatch('addInternship', this.form);
             this.$emit('switch-tab', 'InternshipList');
         }

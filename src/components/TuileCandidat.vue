@@ -12,9 +12,9 @@
         </div>
         <div v-else class="is-admin__cols">
           <div class="is-admin__col">
-            <p class="mb-1 text-muted font-bold">{{ userInfos.name }}</p>
+            <p class="mb-1 text-muted font-bold">{{ user.firstName + ' ' + user.lastName }}</p>
             <p class="mb-1 "><strong>Ville:</strong> {{ application.city }}</p>
-            <p class="mb-2 "><strong>Formation:</strong> {{ userInfos.school }}</p>
+            <p class="mb-2 "><strong>Formation:</strong> {{ user.school }}</p>
           </div>
           <div v-if="!isWaitingForValidation" class="is-admin__col is-admin__col--last">
             <p class="mb-1 "><strong>Début:</strong> {{ application.startDate }}</p>
@@ -23,14 +23,14 @@
           </div>
         </div>
         <div class="description">
-          <p class="card-text description__text">{{ application.description }}</p>
+          <p class="card-text description__text mr-3">{{ application.description }}</p>
           <img v-if="!enVedette && !isAdmin" class="description__logo" :src="logoSchool" alt="Alt du logo" />
         </div>
         
     </div>
     <div v-if="!isAdmin" class="card-footer">
       <router-link :to="{ name: 'detailDemande', params: {application: application, id:application.id} }" class="a-btn-primary a-btn-primary--transparent mr-2">Détails</router-link>
-      <a href="#" class="a-btn-primary a-btn-primary--purple d-inline-block">Contacter</a>
+      <a v-if="user" :href="'mailto:' + user.email" class="a-btn-primary a-btn-primary--purple d-inline-block">Contacter</a>
     </div>
     <div v-else class="card-footer is-admin__footer">
       <router-link :to="{ name: 'detailDemande', params: {application: application, id:application.id} }" target="_blank" class="a-btn-primary a-btn-primary--blue is-admin__footer-left">Détails</router-link>
@@ -79,27 +79,10 @@ export default {
     }
   },
   computed: {
-      userInfos () {
-          const users = this.$store.state.users;
-          let name = "";
-          let school = "";
-
-          for (const user of users) {
-              if (user.id === this.application.authorID) {
-                  const firstName = user.firstName;
-                  const lastName = user.lastName;
-                  name = firstName + " " + lastName;
-                  school = user.school;
-              }
-          }
-
-          const userInfos = {
-            name,
-            school,
-          }
-
-          return userInfos;
-      }
+    user() {
+      let userID = this.application.authorID;
+      return this.$store.getters.userByPost(userID);
+    },
   },
   created () {
       this.loading = true

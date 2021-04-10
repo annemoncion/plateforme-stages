@@ -8,7 +8,7 @@
         <ul class="filter__list">
             <li
                 class="filter__item filter__item--no-filter" 
-                :class="{'is-active' : noActiveFilter}"
+                :class="[{'filter__item--is-active' : noActiveFilter}, {'filter__item--hidden' : disabled}]"
                 @click="clearFilter()">
                     <strong>Tous les secteurs</strong>
             </li>
@@ -16,7 +16,7 @@
                 v-for="field, k in fields" 
                 :key="k"
                 class="filter__item" 
-                :class="{'is-active' : field.isActive}"
+                :class="[{'filter__item--is-active' : field.isActive}, {'filter__item--disabled' : disabled}]"
                 @click="activateFilter(k)">
                     {{field.title}}
             </li>
@@ -29,6 +29,16 @@
 <script>
 export default {
   name: 'FieldFilter',
+  props: {
+      disabled: {
+          type: Boolean,
+          default: false
+      },
+      currentField: {
+          type: String,
+          default: '',
+      }
+  },
   data() {
       return {
           loading: false,
@@ -40,8 +50,8 @@ export default {
       return this.$store.state.fields
     },
     noActiveFilter () {
-        return this.noFilter
-    }
+        return this.disabled ? false : this.noFilter     
+    },
   },
   created () {
     this.loading = true
@@ -50,22 +60,37 @@ export default {
         this.loading = false
       })
   },
+  mounted () {
+    if (this.currentField.length > 0) {
+        let currentFieldIndex = this.fields.findIndex(x => x.title == this.currentField)
+        this.fields[currentFieldIndex].isActive = true; 
+    }
+    else {
+        for (let i = 0; i < this.fields.length; i++) {
+            this.fields[i].isActive = false;
+        }
+    }
+  },
   methods: {
-      activateFilter(index) {
-          for (let i = 0; i < this.fields.length; i++) {
-              this.fields[i].isActive = false;
-          }
-          this.noFilter = false;
-          this.fields[index].isActive = true;
-          this.$emit('filter-data', this.fields[index].title);
+    activateFilter(index) {
+        if (!this.disabled) {
+            for (let i = 0; i < this.fields.length; i++) {
+                this.fields[i].isActive = false;
+            }
+            this.noFilter = false;
+            this.fields[index].isActive = true;
+            this.$emit('filter-data', this.fields[index].title);
+        }     
       },
-      clearFilter() {
-          for (let i = 0; i < this.fields.length; i++) {
-              this.fields[i].isActive = false;
-          }
-          this.noFilter = true;
-          this.$emit('filter-data', '');
-      },
+    clearFilter() {
+        if (!this.disabled) {
+            for (let i = 0; i < this.fields.length; i++) {
+                this.fields[i].isActive = false;
+            }
+            this.noFilter = true;
+            this.$emit('filter-data', '');
+        }
+    },
   }
 }
 </script>
@@ -117,20 +142,26 @@ export default {
             display: none;
         }
 
-        &:hover,
-        &.is-active {
+        &:hover:not(.filter__item--disabled),
+        &--is-active:not(.filter__item--disabled) {
             background-color: $purple;
             color: $white;
             cursor: pointer;
         }
 
-        &.is-active {
+        &--is-active {
+            background-color: $purple;
+            color: $white;
             border-left: 6px solid $fushia;
         }
 
         &--no-filter {
             color: $purple;
             font-size: 1.1em;
+        }
+
+        &--hidden {
+            display: none;
         }
     }
 

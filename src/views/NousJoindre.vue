@@ -6,7 +6,7 @@
 
         <b-container>
             <b-row class="my-4">
-                <b-col md="4" class="about__logo-container">
+                <b-col md="4" class="about__logo-container mb-3 mb-md-0">
                     <img class="about__logo" :src="require('@/assets/img/logoipsum-black.svg')" alt="Logo E-Stage" />
                 </b-col>
                 <b-col offset-md="1" md="7">

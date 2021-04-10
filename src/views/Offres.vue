@@ -31,7 +31,7 @@
                 <li>In faucibus orci luctus et ultrices</li>
                 <li>Ipsum primis in faucibus orci luctus</li>
             </ul>
-            <a class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</a>
+            <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</router-link>
             <template v-slot:image>
                 <div :style="urlStart + pingPongFirst + urlEnd"></div>
             </template>
@@ -47,7 +47,7 @@
                 <li>In faucibus orci luctus et ultrices</li>
                 <li>Ipsum primis in faucibus orci luctus</li>
             </ul>
-            <a class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</a>
+            <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</router-link>
             <template v-slot:image>
                 <div :style="urlStart + pingPongSecond + urlEnd"></div>
             </template>
@@ -97,8 +97,11 @@ export default {
                 return this.$store.getters.internshipsByField(this.filter.field)
             }
             else {
-                return this.$store.state.internships
+                return this.$store.getters.publicInternships
             }
+        },
+        connexion() {
+            return localStorage.userID ? '/mon-portail' : '/connexion'
         }
     },
     created () {

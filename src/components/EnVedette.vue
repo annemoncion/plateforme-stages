@@ -2,12 +2,14 @@
     <b-container class="featured my-5">
         <b-row class="mb-4 text-center">
             <b-col offset-lg="3" lg="6">
-                <h1 class="light-text">{{ sectionTitle }}</h1>
+                <div class="featured__title-container">
+                    <h1 class="light-text featured__title">{{ sectionTitle }}</h1>
+                </div>    
                 <p class="light-text mb-0">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec facilisis at velit vitae rhoncus. Suspendisse potenti.</p>
             </b-col>
         </b-row>
         <b-row>
-            <b-col v-for="dataItem in dataFetched" :key="dataItem.id" lg="3" class="featured__cards">
+            <b-col v-for="dataItem in dataFetched" :key="dataItem.id" lg="3" class="featured__cards mb-2 mb-lg-0">
                 <component :internship="internship(dataItem)" :application="application(dataItem)" :is="capitalizedCategorie" :enVedette="true"></component>
             </b-col>
         </b-row>
@@ -100,6 +102,16 @@ export default {
 @import '@/assets/style/_variables.scss';
 
 .featured {
+    &__title-container {
+        width: 100%;
+    }
+    
+    &__title {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     &__cards {
         display: flex;
         align-items: stretch;

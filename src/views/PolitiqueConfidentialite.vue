@@ -5,7 +5,7 @@
         <Heading>Politiques de confidentialité</Heading>
 
         <b-container>
-            <b-row class="my-4">
+            <b-row class="my-2 my-md-4">
                 <b-col offset-md="2" md="8">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem sit amet nibh lobortis tincidunt in id dui. Quisque convallis, nisl nec efficitur ultricies, lectus odio volutpat magna, vel ultricies metus justo in elit. Nunc sit amet dictum ligula, quis rhoncus ipsum. Aenean dui lacus, fermentum et mauris sit amet, vehicula condimentum dui. Phasellus molestie metus sit amet lectus maximus, vel laoreet felis dictum. Nullam commodo elementum convallis. Suspendisse aliquet purus sollicitudin vestibulum blandit. Sed varius augue nec vulputate ornare. Quisque in augue vel ipsum varius porttitor id non leo.</p>
                     <p>Sed vitae nisl sollicitudin enim porttitor maximus in quis purus. In rutrum fermentum quam eget venenatis. Vivamus imperdiet ultricies ante, non sagittis felis pellentesque ut. Integer ullamcorper risus purus, id lobortis nunc porta tincidunt. Curabitur eget justo eget turpis sodales egestas nec sit amet orci. Vestibulum vitae tincidunt nunc. Maecenas consectetur aliquet aliquam. Aenean iaculis sapien ipsum, in pretium odio dignissim quis. Quisque auctor neque vel convallis maximus.</p>

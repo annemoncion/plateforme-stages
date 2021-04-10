@@ -79,7 +79,7 @@ const routes = [
       breadcrumb: [
         { name: 'Accueil', link: '/' },
         { name: 'Candidats', link: '/demandes-de-stage' },
-        { name: 'Nom du candidat' }
+        { name: 'Fiche' }
       ]
     }
   },
@@ -96,7 +96,7 @@ const routes = [
       breadcrumb: [
         { name: 'Accueil', link: '/' },
         { name: 'Stages', link: '/offres-de-stage' },
-        { name: 'Nom du stage' }
+        { name: 'Fiche' }
       ]
     }
   },

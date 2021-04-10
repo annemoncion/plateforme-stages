@@ -32,14 +32,20 @@
   }
 
   &__cols {
-      display: flex;
+
+      @media (min-width: $md) {
+          display: flex;
+      }
   }
 
   &__col {
     
       &--last {
-          text-align: right;
-          flex-basis: 50%;
+
+        @media (min-width: $md) {
+            text-align: right;
+            flex-basis: 50%;
+        }
       }
   }
 
@@ -55,15 +61,23 @@
 }
 
 .description {
-  display: flex;
   margin-bottom: 0;
-  height: 48px;
+  height: 96px;
   overflow: hidden;
   text-overflow: ellipsis;
 
+  @media (min-width: $lg) {
+    display: flex;
+    height: 48px;
+  }
+
 
   &__logo {
-    flex-shrink: 0;
+    display: none;
+    @media (min-width: $lg) {
+        display: block;
+        flex-shrink: 0;
+    }
   }
 }
 

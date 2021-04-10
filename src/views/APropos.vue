@@ -6,7 +6,7 @@
 
         <b-container>
             <b-row class="my-4">
-                <b-col md="4" class="about__logo-container">
+                <b-col md="4" class="about__logo-container mb-3 mb-md-0">
                     <img class="about__logo" :src="require('@/assets/img/logoipsum-black.svg')" alt="Logo E-Stage" />
                 </b-col>
                 <b-col offset-md="1" md="7">
@@ -15,17 +15,17 @@
             </b-row>
 
             <b-row class="my-4">
-                <b-col md="4" class="about__card">
+                <b-col md="4" class="about__card mb-3 mb-md-0">
                     <b-img fluid class="about__card-img" :src="require('@/assets/img/pingpong1.jpg')" alt="Description de l'image" />
                     <h3 class="about__card-title">Forces avenir</h3>
                     <p class="about__card-content">Sed vitae nisl sollicitudin enim porttitor maximus in quis purus. In rutrum fermentum quam eget venenatis. Vivamus imperdiet ultricies ante, non sagittis felis pellentesque ut. Integer ullamcorper risus purus, id lobortis nunc porta tincidunt.</p>
                 </b-col>
-                <b-col md="4" class="about__card">
+                <b-col md="4" class="about__card mb-3 mb-md-0">
                     <b-img fluid class="about__card-img" :src="require('@/assets/img/pingpong2.jpg')" alt="Description de l'image" />
                     <h3 class="about__card-title">Centraide</h3>
                     <p class="about__card-content">Sed vitae nisl sollicitudin enim porttitor maximus in quis purus. In rutrum fermentum quam eget venenatis. Vivamus imperdiet ultricies ante, non sagittis felis pellentesque ut. Integer ullamcorper risus purus, id lobortis nunc porta tincidunt.</p>
                 </b-col>
-                <b-col md="4" class="about__card">
+                <b-col md="4" class="about__card mb-3 mb-md-0">
                     <b-img fluid class="about__card-img" :src="require('@/assets/img/pingpong3.jpg')" alt="Description de l'image" />
                     <h3 class="about__card-title">Fondation Réno-jouets</h3>
                     <p class="about__card-content">Sed vitae nisl sollicitudin enim porttitor maximus in quis purus. In rutrum fermentum quam eget venenatis. Vivamus imperdiet ultricies ante, non sagittis felis pellentesque ut. Integer ullamcorper risus purus, id lobortis nunc porta tincidunt.</p>
@@ -55,3 +55,25 @@ export default {
     },
 }
 </script>
+
+<style scoped lang="scss">
+@import '@/assets/style/_variables.scss';
+
+.about {
+    &__logo {
+        width: 100%;
+    }
+
+    &__card {
+        text-align: center;
+    }
+
+    &__card-title {
+        margin-top: 24px;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 1.5em;
+    }
+}
+
+</style>

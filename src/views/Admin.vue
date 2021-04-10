@@ -42,13 +42,12 @@
                                     Ajouter une demande de stage
                             </button>
                             <div class="admin__right-nav">
-                                <div tabindex="1" class="admin__profile-btn px-3 mx-3">
+                                <div class="admin__profile-btn px-3 mx-3">
                                     <div v-if="currentUser" class="admin__profile-title mr-2">
                                         <p class="admin__profile-name mb-0">{{currentUser.firstName + ' ' + currentUser.lastName}}</p>
                                         <p class="admin__profile-role mb-0">{{role}}</p>
                                     </div>
                                     <div class="admin__profile-picture mr-2"></div>
-                                    <b-icon icon="chevron-down"></b-icon>
                                 </div>
                                 <div class="admin__icon-right mr-3">
                                     <b-icon icon="bell" font-scale="1.25" />

@@ -17,7 +17,7 @@
                     :key="application.id" 
                     :application="application" 
                     :isAdmin="true"
-                    :isWaitingForValidation="true"
+                    :isWaitingForValidation="currentUser.accessLevel === 999"
                     class="mb-2"/>
             </div>
             <div v-else>
@@ -36,7 +36,7 @@
                     :key="internship.id" 
                     :internship="internship" 
                     :isAdmin="true"
-                    :isWaitingForValidation="true"
+                    :isWaitingForValidation="currentUser.accessLevel === 999"
                     class="mb-2" />
             </div>
             <div v-else>
@@ -64,10 +64,10 @@ export default {
     },
     computed: {
         applicationsToValidate() {
-            return this.$store.state.applications.filter(application => !application.isValidated);
+            return this.$store.state.applications.filter(application => !application.isValidated && !application.isDeleted);
         },
         internshipsToValidate() {
-            return this.$store.state.internships.filter(internship => !internship.isValidated);
+            return this.$store.state.internships.filter(internship => !internship.isValidated && !internship.isDeleted);
         },
         applicationsFilteredByUser() {
             return this.applicationsToValidate.filter(application => application.authorID === this.currentUser.id);

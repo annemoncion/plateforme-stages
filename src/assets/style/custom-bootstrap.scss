@@ -1,3 +1,5 @@
+@import '@/assets/style/_variables.scss';
+
 // Grid containers
 //
 // Define the maximum width of `.container` for different screen sizes.
@@ -34,15 +36,24 @@ $spacers: map-merge(
 
 $font-size-base:              1rem; // Assumes the browser default, typically `16px`
 
-$h1-font-size:                $font-size-base * 3;
-$h2-font-size:                $font-size-base * 2.5;
-$h3-font-size:                $font-size-base * 1.75;
-$h4-font-size:                $font-size-base * 1.5;
-$h5-font-size:                $font-size-base * 1.25;
+$h1-font-size:                $font-size-base * 2.5;
+$h2-font-size:                $font-size-base * 2;
+$h3-font-size:                $font-size-base * 1.5;
+$h4-font-size:                $font-size-base * 1.25;
+$h5-font-size:                $font-size-base * 1.1;
 $h6-font-size:                $font-size-base;
 
 $headings-font-weight:        600;
 $headings-margin-bottom:      $spacer * 1.5 !default;
+
+@media (min-width: $md) {
+  $h1-font-size:                $font-size-base * 3;
+  $h2-font-size:                $font-size-base * 2.5;
+  $h3-font-size:                $font-size-base * 1.75;
+  $h4-font-size:                $font-size-base * 1.5;
+  $h5-font-size:                $font-size-base * 1.25;
+  $h6-font-size:                $font-size-base;
+}
 
 // Include Bootstrap and BootstrapVue SCSS files
 @import '~bootstrap/scss/bootstrap.scss';

@@ -13,7 +13,7 @@
         <div v-else class="is-admin__cols">
           <div class="is-admin__col">
             <p class="mb-1 "><strong>Ville:</strong> {{ internship.city }}</p>
-            <p class="mb-2 "><strong>Entreprise:</strong> {{ businessName }}</p>
+            <p class="mb-2 "><strong>Entreprise:</strong> {{ user.businessName }}</p>
           </div>
           <div v-if="!isWaitingForValidation" class="is-admin__col is-admin__col--last">
             <p class="mb-1 "><strong>Début:</strong> {{ internship.startDate }}</p>
@@ -21,20 +21,28 @@
           </div>
         </div>
         <div class="description">
-          <p class="card-text description__text">{{ internship.description }}</p>
+          <p class="card-text description__text mr-3">{{ internship.description }}</p>
           <img v-if="!enVedette && !isAdmin" class="description__logo" :src="logoCie" alt="Alt du logo" />
         </div>
     </div>
+
     <div v-if="!isAdmin" class="card-footer">
-        <router-link :to="{ name: 'detailOffre', params: {internship: internship, id:internship.id} }" class="a-btn-primary a-btn-primary--transparent mr-2">Détails</router-link>
-        <a href="#" class="a-btn-primary a-btn-primary--purple d-inline-block">Postuler</a>
+        <router-link 
+          :to="{ name: 'detailOffre', params: {id:internship.id} }" 
+          class="a-btn-primary a-btn-primary--transparent mr-2">
+            Détails
+        </router-link>
+        <a v-if="user" :href="'mailto:' + user.email" class="a-btn-primary a-btn-primary--purple d-inline-block">Postuler</a>
     </div>
+
     <div v-else class="card-footer is-admin__footer">
-      <router-link :to="{ name: 'detailOffre', params: {internship: internship, id:internship.id} }" target="_blank" class="a-btn-primary a-btn-primary--blue is-admin__footer-left">Détails</router-link>
+      <router-link :to="{ name: 'detailOffre', params: {id:internship.id} }" target="_blank" class="a-btn-primary a-btn-primary--blue is-admin__footer-left">Détails</router-link>
+      
       <div v-if="isWaitingForValidation">
         <button class="a-btn-primary a-btn-primary--red mx-1">Refuser</button>
         <button class="a-btn-primary a-btn-primary--green">Accepter</button>
       </div>
+      
       <div v-else>
         <button class="a-btn-primary a-btn-primary--green" @click="showModalModify(internship.id)">
           <b-icon icon="pencil-square" class="mr-1" />
@@ -75,18 +83,10 @@ export default {
     }
   },
   computed: {
-      businessName () {
-          const users = this.$store.state.users;
-          let businessName = "";
-
-          for (const user of users) {
-              if (user.id === this.internship.authorID) {
-                  businessName = user.businessName;
-              }
-          }
-
-          return businessName;
-      }
+      user() {
+        let userID = this.internship.authorID;
+        return this.$store.getters.userByPost(userID);
+      },
   },
   created () {
       this.loading = true

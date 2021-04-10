@@ -11,7 +11,7 @@
                     <FicheStage :internship="internship" />
                 </b-col>
                 <b-col md="4">
-                    <FieldFilter />
+                    <FieldFilter v-if="internship" :currentField="internship.field" :disabled="true" />
                 </b-col>
             </b-row>
         </b-container>
@@ -24,7 +24,7 @@
                 <li>In faucibus orci luctus et ultrices</li>
                 <li>Ipsum primis in faucibus orci luctus</li>
             </ul>
-            <a class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</a>
+            <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</router-link>
             <template v-slot:image>
                 <div :style="urlStart + pingPongFirst + urlEnd"></div>
             </template>
@@ -40,7 +40,7 @@
                 <li>In faucibus orci luctus et ultrices</li>
                 <li>Ipsum primis in faucibus orci luctus</li>
             </ul>
-            <a class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</a>
+            <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</router-link>
             <template v-slot:image>
                 <div :style="urlStart + pingPongSecond + urlEnd"></div>
             </template>
@@ -84,14 +84,11 @@ export default {
     },
     computed: {
         internship() {
-            let id = this.$route.params.id
-            let internships = this.$store.state.internships
-            // Search internship with route id param
-            let currentInternship = internships.filter(function (el) {
-                return el.id === id;
-                }
-            );
-            return currentInternship[0];
+            let id = this.$route.params.id;
+            return this.$store.getters.internshipByID(id);
+        },
+        connexion() {
+            return localStorage.userID ? '/mon-portail' : '/connexion'
         }
     },
     created () {

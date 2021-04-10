@@ -112,11 +112,15 @@ export default {
     &__btn {
         border-radius: 0;
         font-size: 0.8em;
-        padding: 12px 40px;
+        padding: 12px;
         border: 0;
         background: $purple;
         background: linear-gradient(90deg, rgba(var(--purple-rgb),1) 0%, rgba(var(--fushia-rgb),1) 100%);
         transition: background-position 0.2s ease;
+
+        @media (min-width: $sm) {
+            padding: 12px 40px;
+        }
 
         &:hover, &:focus {
             border: 0;

@@ -8,12 +8,17 @@
             <b-row class="mt-3">
                 <b-col md="8">
                     <Breadcrumbs />
-                    <div v-for="application in applications" :key="application.id" class="mb-3">
-                        <Candidat :application="application" />
+                    <div v-if="applications.length > 0">
+                        <div v-for="application in applications" :key="application.id" class="mb-3">
+                            <Candidat :application="application" />
+                        </div>
                     </div>
+                    <div v-else>
+                        <p>Aucune demande de stage n'est présentement disponible dans ce secteur.</p>
+                    </div>      
                 </b-col>
                 <b-col md="4">
-                    <FieldFilter />
+                    <FieldFilter @filter-data="filterApplications" />
                 </b-col>
             </b-row>
         </b-container>
@@ -26,7 +31,7 @@
                 <li>In faucibus orci luctus et ultrices</li>
                 <li>Ipsum primis in faucibus orci luctus</li>
             </ul>
-            <a class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</a>
+            <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</router-link>
             <template v-slot:image>
                 <div :style="urlStart + pingPongFirst + urlEnd"></div>
             </template>
@@ -42,7 +47,7 @@
                 <li>In faucibus orci luctus et ultrices</li>
                 <li>Ipsum primis in faucibus orci luctus</li>
             </ul>
-            <a class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</a>
+            <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</router-link>
             <template v-slot:image>
                 <div :style="urlStart + pingPongSecond + urlEnd"></div>
             </template>
@@ -80,11 +85,23 @@ export default {
             pingPongSecond: require('@/assets/img/pingpong4.jpg'),
             urlStart: "--bg-ping-pong: url('",
             urlEnd: "')",
+            filter: {
+                field: "",
+                active: false
+            }
         }
     },
     computed: {
         applications () {
-            return this.$store.state.applications
+            if (this.filter.active) {
+                return this.$store.getters.applicationsByField(this.filter.field)
+            }
+            else {
+                return this.$store.getters.publicApplications
+            }
+        },
+        connexion() {
+            return localStorage.userID ? '/mon-portail' : '/connexion'
         }
     },
     created () {
@@ -94,6 +111,17 @@ export default {
             this.loading = false
         })
     },
+    methods: {
+        filterApplications(field) {
+            if (field.length > 0) {
+                this.filter.field = field;
+                this.filter.active = true; 
+            }
+            else {
+                this.filter.active = false;
+            }
+        }
+    }
 }
 </script>
 

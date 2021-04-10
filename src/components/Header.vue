@@ -8,7 +8,7 @@
 
         <b-collapse id="nav-collapse" is-nav>
 
-          <b-navbar-nav class="ml-3 header__nav-block">
+          <b-navbar-nav class="ml-md-3 header__nav-block">
             <router-link to="/offres-de-stage" class="a-btn-primary a-btn-primary--green a-btn-primary--rounded">Trouvez votre stage</router-link>
             <router-link to="/demandes-de-stage" class="a-btn-primary a-btn-primary--green a-btn-primary--rounded">Trouvez votre futur stagiaire</router-link>
           </b-navbar-nav>

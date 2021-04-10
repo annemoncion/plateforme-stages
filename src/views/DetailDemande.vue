@@ -11,7 +11,7 @@
                     <FicheCandidat :application="application" />
                 </b-col>
                 <b-col md="4">
-                    <FieldFilter />
+                    <FieldFilter v-if="application" :currentField="application.field" :disabled="true" />
                 </b-col>
             </b-row>
         </b-container>
@@ -84,14 +84,8 @@ export default {
     },
     computed: {
         application() {
-            let id = this.$route.params.id
-            let applications = this.$store.state.applications
-            // Search application with route id param
-            let currentApplication = applications.filter(function (el) {
-                return el.id === id;
-                }
-            );
-            return currentApplication[0];
+            let id = this.$route.params.id;
+            return this.$store.getters.applicationByID(id);
         }
     },
     created () {
