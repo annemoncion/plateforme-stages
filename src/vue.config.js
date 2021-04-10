@@ -1,16 +1,12 @@
-const path = require('path')
+//const path = require('path')
 module.exports = {
-  pluginOptions: {
+  /*pluginOptions: {
     'style-resources-loader': {
       'preProcessor': 'scss',
       'patterns': [
         path.resolve(__dirname, './src/assets/style/*.scss'),
       ]
     }
-  }
-}
-
-module.exports = 
-{
+  }*/
   publicPath: './',
-};
+}
