@@ -7,8 +7,10 @@ module.exports = {
         path.resolve(__dirname, './src/assets/style/*.scss'),
       ]
     }
-  },
-  publicPath: process.env.NODE_ENV === 'production'
-    ? './dist/'
-    : '/'
+  }
 }
+
+module.exports = 
+{
+  publicPath: './',
+};
