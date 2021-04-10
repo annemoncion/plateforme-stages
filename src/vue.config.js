@@ -1,12 +1,8 @@
-//const path = require('path')
-module.exports = {
-  /*pluginOptions: {
-    'style-resources-loader': {
-      'preProcessor': 'scss',
-      'patterns': [
-        path.resolve(__dirname, './src/assets/style/*.scss'),
-      ]
-    }
-  }*/
-  publicPath: './',
+// vue.config.js
+
+/**
+ * @type {import('@vue/cli-service').ProjectOptions}
+ */
+ module.exports = {
+  publicPath: "./",
 }
