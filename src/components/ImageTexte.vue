@@ -9,7 +9,7 @@
 
         <b-row class="mb-2">
             <b-col md="6" class="image-text__image">
-                <div :style="urlStart + img + urlEnd"></div>
+                <div :style="{ backgroundImage: 'url(' + img + ')' }"></div>
             </b-col>
             <b-col md="6" class="p-3 py-4 py-md-5 px-md-4 image-text__grey-block">
                 <p class="mb-0 text-white size-medium">Maecenas eget lorem sit amet nibh lobortis tincidunt in id dui. Quisque convallis, nisl nec efficitur. Nunc porta ante augue, quis vulputate purus sollicitudin quis. Duis ultrices tincidunt aliquet. Proin ex orci, posuere eu pharetra at, pharetra quis ligula.</p>
@@ -30,8 +30,6 @@ export default {
     data() {
         return {
             img: require('@/assets/img/pingpong1.jpg'),
-            urlStart: "--bg-ping-pong: url('",
-            urlEnd: "')",
         }
     },
 }
