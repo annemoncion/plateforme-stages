@@ -41,13 +41,19 @@ export default {
   },
   data() {
       return {
-          loading: false,
+          loading: true,
           noFilter: true,
       }
   },
   computed: {
-    fields () {
-      return this.$store.state.fields
+    fields: {
+      //return this.$store.state.fields
+        get(){
+            return this.$store.state.fields
+        },
+        set(newFields){
+            return newFields
+        }
     },
     noActiveFilter () {
         return this.disabled ? false : this.noFilter     
@@ -61,15 +67,19 @@ export default {
       })
   },
   mounted () {
-    if (this.currentField.length > 0) {
-        let currentFieldIndex = this.fields.findIndex(x => x.title == this.currentField)
-        this.fields[currentFieldIndex].isActive = true; 
+    if (this.fields.length > 0) {
+        this.matchField();
     }
-    else {
-        for (let i = 0; i < this.fields.length; i++) {
-            this.fields[i].isActive = false;
+  },
+  watch: {
+    fields: function (change) {
+        // binding this to the data value in the codePostal input
+        this.fields = change
+
+        if (change) {
+            this.matchField();    
         }
-    }
+    } 
   },
   methods: {
     activateFilter(index) {
@@ -91,6 +101,17 @@ export default {
             this.$emit('filter-data', '');
         }
     },
+    matchField() {
+        if (this.currentField.length > 0) {
+            let currentFieldIndex = this.fields.findIndex(x => x.title == this.currentField)
+            this.fields[currentFieldIndex].isActive = true;   
+        }
+        else {
+            for (let i = 0; i < this.fields.length; i++) {
+                this.fields[i].isActive = false;
+            }
+        }     
+    }
   }
 }
 </script>
