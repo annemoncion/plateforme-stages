@@ -17,7 +17,8 @@
                     :key="application.id" 
                     :application="application" 
                     :isAdmin="true"
-                    :isWaitingForValidation="currentUser.accessLevel === 999"
+                    :isWaitingForValidation="true"
+                    :isEditable="currentUser.accessLevel === 999"
                     class="mb-2"/>
             </div>
             <div v-else>
@@ -36,7 +37,8 @@
                     :key="internship.id" 
                     :internship="internship" 
                     :isAdmin="true"
-                    :isWaitingForValidation="currentUser.accessLevel === 999"
+                    :isWaitingForValidation="true"
+                    :isEditable="currentUser.accessLevel === 999"
                     class="mb-2" />
             </div>
             <div v-else>

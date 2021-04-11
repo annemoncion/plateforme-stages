@@ -38,12 +38,12 @@
     <div v-else class="card-footer is-admin__footer">
       <router-link :to="{ name: 'detailOffre', params: {id:internship.id} }" target="_blank" class="a-btn-primary a-btn-primary--blue is-admin__footer-left">Détails</router-link>
       
-      <div v-if="isWaitingForValidation">
+      <div v-if="isWaitingForValidation && isEditable">
         <button class="a-btn-primary a-btn-primary--red mx-1">Refuser</button>
         <button class="a-btn-primary a-btn-primary--green">Accepter</button>
       </div>
       
-      <div v-else>
+      <div v-else-if="!isWaitingForValidation && !isEditable">
         <button class="a-btn-primary a-btn-primary--green" @click="showModalModify(internship.id)">
           <b-icon icon="pencil-square" class="mr-1" />
           Modifier
@@ -72,6 +72,10 @@ export default {
     isWaitingForValidation: {
       type: Boolean,
       default: false,
+    },
+    isEditable: {
+      type: Boolean,
+      default: false
     },
     internship: {
       type: Object,
