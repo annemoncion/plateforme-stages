@@ -349,7 +349,7 @@ export default {
     },
     watch: {
         endDate(value){
-            // binding this to the data value in the codePostal input
+            // binding this to the data value
             this.form.endDate = value
 
             if (value) {
