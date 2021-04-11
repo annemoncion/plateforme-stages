@@ -23,7 +23,7 @@
             </b-row>
         </b-container>
         
-        <PingPong :imgFirst="true">
+        <PingPong :imgFirst="true" :image="pingPongFirst">
             <template v-slot:title>Pourquoi publier une offre de stage?</template>
             <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec facilisis at velit vitae rhoncus.</p>
             <ul class="mb-3">
@@ -32,14 +32,11 @@
                 <li>Ipsum primis in faucibus orci luctus</li>
             </ul>
             <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</router-link>
-            <template v-slot:image>
-                <div :style="urlStart + pingPongFirst + urlEnd"></div>
-            </template>
         </PingPong>
 
         <EnVedette :category="'stage'" />
 
-        <PingPong :imgFirst="false">
+        <PingPong :imgFirst="false" :image="pingPongSecond">
             <template v-slot:title>Trouvez un stage à la hauteur de vos attentes</template>
             <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec facilisis at velit vitae rhoncus.</p>
             <ul class="mb-3">
@@ -48,9 +45,6 @@
                 <li>Ipsum primis in faucibus orci luctus</li>
             </ul>
             <router-link :to="connexion" class="a-btn-primary a-btn-primary--purple">Publier une offre maintenant!</router-link>
-            <template v-slot:image>
-                <div :style="urlStart + pingPongSecond + urlEnd"></div>
-            </template>
         </PingPong>
 
         <Pub />
@@ -83,8 +77,6 @@ export default {
         return {
             pingPongFirst: require('@/assets/img/pingpong3.jpg'),
             pingPongSecond: require('@/assets/img/pingpong4.jpg'),
-            urlStart: "--bg-ping-pong: url('",
-            urlEnd: "')",
             filter: {
                 field: "",
                 active: false

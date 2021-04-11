@@ -8,7 +8,7 @@
             </div>
         </b-col>
         <b-col md="6" class="pingpong__image px-0">
-            <slot name="image"></slot>
+            <div :style="{ backgroundImage: 'url(' + image + ')' }"></div>
         </b-col>
     </b-row>
   </b-container>
@@ -19,6 +19,7 @@ export default {
   name: 'PingPong',
   props: {
       imgFirst: Boolean,
+      image: String,
   },
   computed: {
       rowReverse() {
@@ -72,7 +73,6 @@ export default {
         }
 
         div {
-            background-image: var(--bg-ping-pong), none;
             background-position: 0 center;
             background-size: cover;
             background-repeat: no-repeat;
