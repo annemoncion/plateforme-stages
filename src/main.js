@@ -5,12 +5,12 @@ import store from "./store"
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
-// Import Custom Bootstrap
+// Importer le thème Bootstrap personnalisé
 import '@/assets/style/custom-bootstrap.scss'
 
-// Make BootstrapVue available throughout your project
+// Rendre Bootstrap Vue accessible de tout le projet
 Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
+// Installer les icônes de Bootstrap Vue
 Vue.use(IconsPlugin)
 
 Vue.config.productionTip = false

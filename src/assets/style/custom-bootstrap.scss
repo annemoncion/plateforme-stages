@@ -1,8 +1,6 @@
 @import '@/assets/style/_variables.scss';
 
-// Grid containers
-//
-// Define the maximum width of `.container` for different screen sizes.
+// Grille
 
 $container-max-widths: (
   sm: 540px,
@@ -11,10 +9,7 @@ $container-max-widths: (
   xl: 1400px
 );
 
-// Spacing
-// Control the default styling of most Bootstrap elements by modifying these
-// variables. Mostly focused on spacing.
-// You can add more entries to the $spacers map, should you need more variation.
+// Espacement
 
 $spacer: 1rem ;
 $spacers: () ;
@@ -30,11 +25,9 @@ $spacers: map-merge(
   $spacers
 );
 
-// Typography
-//
-// Font, line-height, and color for body text, headings, and more.
+// Typographie
 
-$font-size-base:              1rem; // Assumes the browser default, typically `16px`
+$font-size-base:              1rem;
 
 $h1-font-size:                $font-size-base * 2.5;
 $h2-font-size:                $font-size-base * 2;
@@ -55,6 +48,6 @@ $headings-margin-bottom:      $spacer * 1.5 !default;
   $h6-font-size:                $font-size-base;
 }
 
-// Include Bootstrap and BootstrapVue SCSS files
+// Inclure les fichiers scss de Bootstrap et BootstrapVue
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~bootstrap-vue/src/index.scss';

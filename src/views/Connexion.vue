@@ -126,7 +126,7 @@ export default {
         onSubmit() {
             this.noMatch = false;
 
-            // Validate form fields
+            // Valider les champs du formulaire
             this.$v.form.$touch();
             if (this.$v.form.$anyError) {
                 return;
@@ -137,26 +137,26 @@ export default {
             let userID = "";
             let userAccessLevel = 0;
 
-            // Search user in store
+            // Chercher les utilisateurs dans le store
             let currentUser = this.users.filter(function (el) {
                 return el.email === email
                     && el.password === password;
                 }
             );
             
-            // If user found, store ID and access level in variables
+            // Si un utilisateur est trouvé, stocker l'ID et le niveau d'accès dans des variables
             if (currentUser.length > 0) {
                 userID = currentUser[0].id;
                 userAccessLevel = currentUser[0].accessLevel;
                 this.$router.push('/mon-portail');
             }
-            // Else display warning that no match have been found
+            // Sinon, afficher l'avertissement qu'aucun utilisateur ne correspond
             else {
                 this.noMatch = true;
                 return;
             }
             
-            // Set variables in local storage
+            // Définir les variables dans le LocalStorage du navigateur
             localStorage.setItem('userID', userID);
             localStorage.setItem('userAccessLevel', userAccessLevel);
         }

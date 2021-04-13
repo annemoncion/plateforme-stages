@@ -62,38 +62,32 @@ export default new Vuex.Store({
       state.applications.push(application)
     },
     modifyApplication (state, application) {
-      // get index of object with param id
+      // Obtenir l'index de l'objet grâce à son ID
       const dataIndex = state.applications.findIndex(x => x.id == application.id);
 
-      // replace object with new data
+      // Remplacer l'ancien objet par la nouveau
       state.applications.splice(dataIndex,1,application);
     },
     deleteApplication (state, id) {
-      // get index of object with param id
+      // Obtenir l'index de l'objet grâce à son ID
       const dataIndex = state.applications.findIndex(x => x.id == id);
-      // set isDeleted to true
+      // Définir "isDeleted" à "true"
       state.applications[dataIndex].isDeleted = true;
     },
     addInternship (state, internship) {
       state.internships.push(internship)
     },
     modifyInternship (state, internship) {
-      // get index of object with param id
+      // Obtenir l'index de l'objet grâce à son ID
       const dataIndex = state.internships.findIndex(x => x.id == internship.id);
 
-      // replace object with new data
+      // Remplacer l'ancien objet par la nouveau
       state.internships.splice(dataIndex,1,internship);
     },
     deleteInternship (state, id) {
-      // Code used eventually to deleted permanently from store:
-      // get index of object with id property
-      // const removeIndex = state.internships.map(function(internship) { return internship.id; }).indexOf(id);
-      // remove object
-      // state.internships.splice(removeIndex, 1);
-
-      // get index of object with param id
+      // Obtenir l'index de l'objet grâce à son ID
       const dataIndex = state.internships.findIndex(x => x.id == id);
-      // set isDeleted to true
+      // Définir "isDeleted" à "true"
       state.internships[dataIndex].isDeleted = true;
     },
     addUser (state, user) {

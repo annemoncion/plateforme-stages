@@ -2,10 +2,10 @@ import { createLocalVue, shallowMount } from '@vue/test-utils'
 import { BootstrapVue } from 'bootstrap-vue'
 import FicheCandidat from '@/components/FicheCandidat.vue'
 
-// create an extended `Vue` constructor
+// Créer un constructor `Vue` étendu
 const localVue = createLocalVue()
 
-// install plugins as normal
+// intaller les extensions normalement
 localVue.use(BootstrapVue)
 
 // Succès

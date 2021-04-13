@@ -1,5 +1,5 @@
 <template>
-  <!-- Thanks to https://github.com/iFgR/vue-breadcrumbs -->
+  <!-- Merci à https://github.com/iFgR/vue-breadcrumbs -->
   <div class="breadcrumbs">
     <ul class="breadcrumbs__list">
       <li

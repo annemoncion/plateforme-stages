@@ -72,7 +72,6 @@ export default {
   },
   watch: {
     fields: function (change) {
-        // binding this to the data value of "fields" computed property
         this.fields = change
 
         if (change) {

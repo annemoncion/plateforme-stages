@@ -1,6 +1,6 @@
 @import 'variables';
 
-// Typography
+// Typographie
 
 h1, h2, h3, h4, h5, h6, p, ul, a, button, input, label, select, span, div {
     font-family: 'Open Sans', sans-serif !important;
@@ -28,7 +28,7 @@ ul {
     }
 }
 
-// Colors
+// Couleurs
 
 @function hexToRGB($hex) {
     @return red($hex), green($hex), blue($hex);
@@ -39,7 +39,7 @@ ul {
     --fushia-rgb: #{hexToRGB($fushia)};
 }
 
-// Helper classes
+// Class réutilisables
 
 .light-text {
     color: $grey-medium;

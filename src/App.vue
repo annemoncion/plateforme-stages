@@ -11,7 +11,6 @@ import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 
 export default {
-  // Comme définit présentement, le filtre de traduction doit être importé dans chaque composant qui l'utilise. Ce serait un comportement à revoir.
   name: 'App',
   components: {
     Header,

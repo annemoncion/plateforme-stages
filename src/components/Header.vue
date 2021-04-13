@@ -13,7 +13,7 @@
             <router-link to="/demandes-de-stage" class="a-btn-primary a-btn-primary--green a-btn-primary--rounded">Trouvez votre futur stagiaire</router-link>
           </b-navbar-nav>
 
-          <!-- Right aligned nav items -->
+          <!-- Items alignés à droite -->
           <b-navbar-nav class="ml-auto header__nav-block">
             <router-link :to="connexion" class="a-btn-primary a-btn-primary--white a-btn-primary--rounded">Connexion</router-link>
             <router-link :to="connexion" class="a-btn-primary a-btn-primary--grey a-btn-primary--rounded">Inscription</router-link>

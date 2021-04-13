@@ -212,14 +212,14 @@ export default {
 
                 return;
             }
-            // Append ID
+            // Ajouter l'ID
             this.form.id = this.generateID();
             this.$store.dispatch('addUser', this.form);
 
             let userID = this.form.id;
             let userAccessLevel = 111;
 
-            // Set variables in local storage
+            // Définir les variables dans le LocalStorage du navigateur
             localStorage.setItem('userID', userID);
             localStorage.setItem('userAccessLevel', userAccessLevel);
 

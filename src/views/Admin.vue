@@ -160,6 +160,7 @@ export default {
             return role;
         }
     },
+    // Accéder aux données du store
     created () {
         this.loading = true
         this.$store.dispatch('fetchApplications')
@@ -170,6 +171,7 @@ export default {
         })
     },
     methods: {
+        // Changer d'onglet selon l'onglet cliqué
         changeTab(index, component) {
             for (let i = 0; i < this.tabsItems.length; i++) {
                 this.tabsItems[i].active = false;
@@ -178,6 +180,7 @@ export default {
             this.openedTab = component;
             window.scrollTo(0, 0);
         },
+        // Cacher les onglets selon le niveau d'accès de l'utilisateur
         hideTab(access, tabName) {
             if (access === 111) {
                 if (tabName === "Offres de stage" || tabName === "Candidats" || tabName === "Entreprises") {
@@ -193,22 +196,26 @@ export default {
                 return false;
             }
         },
+        // Ouvrir l'onglet pour créer une nouvelle demande de stage
         showApplicationForm() {
             for (let i = 0; i < this.tabsItems.length; i++) {
                 this.tabsItems[i].active = false;
             }
             this.openedTab = "NewApplication";
         },
+        // Ouvrir l'onglet pour créer une nouvelle offre de stage
         showInternshipForm() {
             for (let i = 0; i < this.tabsItems.length; i++) {
                 this.tabsItems[i].active = false;
             }
             this.openedTab = "NewInternship";
         },
+        // Retourner à la liste correponsdante à la nouvelle publication créée.
         switchTab(tab) {
             this.openedTab = tab;
             window.scrollTo(0, 0);
         },
+        // Se déconnecter (Retourner à l'accueil du volet public)
         deconnexion() {
             localStorage.removeItem('userID');
             localStorage.removeItem('userAccessLevel');

@@ -212,7 +212,7 @@ export default {
         const now = new Date()
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
         const minDate = new Date(today)
-        // Date maximum: Un an et 15 jours
+        // Date maximale: Un an et 15 jours
         const maxDate = new Date(today) 
         maxDate.setMonth(maxDate.getMonth() + 12)
         maxDate.setDate(15)
@@ -287,7 +287,7 @@ export default {
     },
     watch: {
         endDate(value){
-            // binding this to the data value
+            // lier à la valeur de la donnée
             this.form.endDate = value
 
             if (value) {
@@ -396,11 +396,11 @@ export default {
 
                 return;
             }
-            // Append ID
+            // Ajouter l'ID de l'offre
             this.form.id = this.generateID();
-            // Add author ID
+            // Ajouter l'ID de l'auteur
             this.form.authorID = this.currentUser.id;
-            // Add new data to store
+            // Ajouter le nouvel objet au store
             this.$store.dispatch('addInternship', this.form);
             this.$emit('switch-tab', 'InternshipList');
         }

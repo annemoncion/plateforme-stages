@@ -71,8 +71,8 @@ export default {
         sortedApplications() {
             let app = this.applications;
             app.sort(function(a,b){
-                // Turn your strings into dates, and then subtract them
-                // to get a value that is either negative, positive, or zero.
+                // Transformer les string en dates, et les soustraire l'une de l'autre
+                // pour obtenir une valeur soit négative, positive ou égale à zéro.
                 return new Date(b.parutionDate) - new Date(a.parutionDate);
             });
 

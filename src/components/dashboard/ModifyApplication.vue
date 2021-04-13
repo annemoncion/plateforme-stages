@@ -349,7 +349,7 @@ export default {
     },
     watch: {
         endDate(value){
-            // binding this to the data value
+            // lier à la valeur de la donnée
             this.form.endDate = value
 
             if (value) {
